@@ -1,0 +1,79 @@
+@font-face {
+    font-family: THSarabunNew;
+    src: url('../fonts/THSarabunNew.woff');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: THSarabunNew;
+}
+
+.container-main {
+    height: 100vh;
+}
+
+.container-home {
+    position: absolute;
+    direction: ltr;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: auto;
+    align-content: space-between;
+    align-items: center;
+}
+
+.navbar-home {
+    overflow: hidden;
+    padding-left: 16px;
+    padding-right: 16px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    align-content: space-between;
+    justify-content: space-between;
+    background-color: #f3a5b0;
+}
+
+.navbar-items {
+    display: flex;
+    align-items: center;
+    align-content: flex-start;
+    justify-content: space-between;
+    background-color: #f3a5b0;
+}
+
+.body-home {
+    display: flex;
+    height: auto;
+    justify-content: center;
+}
+
+.body-home .items1 {
+    padding: 16px;
+    display: flex;
+    width: 70%;
+    height: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+    justify-content: center;
+}
+
+.body-home .items2 {
+    width: 30%;
+    height: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+    overflow-y: scroll;
+}
+
+.bottom-home {
+    display: flex;
+    height: auto;
+    align-items: center;
+    background-color: #f3a5b0;
+}
