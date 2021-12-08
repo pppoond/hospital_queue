@@ -24,7 +24,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<h1 style="color: white;font-weight: 400;">โรงพยาบาลเทศบาลนครอุดรธานี</h1>
 
 				</div>
-				<div style="text-align: end;">
+				<div style="text-align: center;">
 					<h1 style="color: white;font-weight: 400;">แผนกผู้ป่วยนอก (OPD)</h1>
 					<p style="color: white;font-size: large;font-weight: 700;border: 3px solid white;border-radius: 12px;padding: 5px;
 					background-color: Salmon;">วันที่ 07/12/2565 เวลา 16:08 น.</p>
