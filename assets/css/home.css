@@ -92,3 +92,50 @@ body {
     align-items: center;
     background-color: orange;
 }
+
+.first-box {
+    width: 300px;
+    float: left;
+    background: green;
+    height: 150px;
+    margin: 50px
+}
+
+.first-box p {
+    color: #ffffff;
+    padding-left: 80px;
+    padding-top: 50px;
+}
+
+.second-box {
+    width: 300px;
+    height: 150px;
+    float: right;
+    background: blue;
+    margin: 50px
+}
+
+.second-box p {
+    color: #ffffff;
+    padding-left: 110px;
+    padding-top: 50px;
+}
+
+.float-child-left {
+    width: 63%;
+    float: left;
+    padding: 0px;
+    margin: 5px;
+}
+
+.float-child-right {
+    width: 32%;
+    float: right;
+    padding: 0px;
+    margin: 5px;
+}
+
+.float-container {
+    padding: 0px;
+    margin: 5px;
+}
