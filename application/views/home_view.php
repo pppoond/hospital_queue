@@ -22,21 +22,39 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<img src="<?php echo base_url('assets/images/logo.png'); ?>" width="75px">
 					<div style="width: 16px;"></div>
 					<h1 style="color: white;font-weight: 400;">โรงพยาบาลเทศบาลนครอุดรธานี</h1>
-
 				</div>
+
+
+				<?php
+				date_default_timezone_set("Asia/Bangkok");
+				function DateThai($strDate)
+				{
+					$strYear = date("Y", strtotime($strDate)) + 543;
+					$strMonth = date("n", strtotime($strDate));
+					$strDay = date("j", strtotime($strDate));
+					$strHour = date("H", strtotime($strDate));
+					$strMinute = date("i", strtotime($strDate));
+					$strSeconds = date("s", strtotime($strDate));
+					$strMonthCut = array("", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
+					$strMonthThai = $strMonthCut[$strMonth];
+					return "$strDay $strMonthThai $strYear";
+				}
+
+				$strDate = date("h:i");
+				?>
+
+
 				<div style="text-align: center;">
 					<h1 style="color: white;font-weight: 400;">แผนกผู้ป่วยนอก (OPD)</h1>
 					<p style="color: white;font-size: large;font-weight: 700;border: 3px solid white;border-radius: 12px;padding: 5px;
-					background-color: Salmon;">วันที่ 07/12/2565 เวลา 16:08 น.</p>
+					background-color: Salmon;">วันที่ <?php echo DateThai($strDate); ?> เวลา <?php echo date("h:i:s"); ?></p>
 				</div>
-				
-  
-				
+
 			</div>
 			<div class="body-home" style="height: 80vh;">
 				<div class="items1">
 					<div class="card text-center container-fluid" style="background-color: #FF8484;" id="link_qmain">
-						
+
 					</div>
 				</div>
 				<div class="items2">
