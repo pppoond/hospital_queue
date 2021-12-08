@@ -6,8 +6,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 <head>
 	<meta charset="utf-8">
-	<title>Welcome to CodeIgniter</title>
+	<title>โรงพยาบาลเทศบาลนครอุดรธานี</title>
 	<link rel="stylesheet" href="<?php echo base_url('assets/css/home.css'); ?>">
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -20,9 +24,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<h1 style="color: white;font-weight: 400;">โรงพยาบาลเทศบาลนครอุดรธานี</h1>
 
 				</div>
-				<div style="text-align: end;">
+				<div style="text-align: center;">
 					<h1 style="color: white;font-weight: 400;">แผนกผู้ป่วยนอก (OPD)</h1>
-					<p style="color: white;font-size: large;font-weight: 700;border-style: solid;width: fit-content;">วันที่ 07/12/2565 เวลา 16:08 น.</p>
+					<p style="color: white;font-size: large;font-weight: 700;border: 3px solid white;border-radius: 12px;padding: 5px;
+					background-color: Salmon;">วันที่ 07/12/2565 เวลา 16:08 น.</p>
 				</div>
 			</div>
 			<div class="body-home" style="height: 80vh;">
@@ -37,7 +42,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 				</div>
 			</div>
 			<div class="bottom-home" style="height: 5vh;">
-				<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestias, porro.</p>
+				<p>xxxxxxxxxx</p>
 			</div>
 		</div>
 	</div>
