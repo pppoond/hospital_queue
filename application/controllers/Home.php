@@ -39,7 +39,7 @@ class Home extends CI_Controller
 			$this->load->view('pages/qmain', $data);
 		}
 	}
-	
+
 	public function getdata()
 	{
 		$query = $this->db->query('SELECT * FROM queue_table');
@@ -49,6 +49,4 @@ class Home extends CI_Controller
 			echo $row->q;
 		}
 	}
-	
-	
 }
