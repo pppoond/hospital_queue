@@ -1,13 +1,17 @@
 <?php
 class HomeModel extends CI_Model
 {
-    public function __construct()
+    public function getData()
     {
-        parent::__construct();
-        $this->load->library('session');
-    }
+        $sql = "SELECT * FROM queue_table";
+        $query =  $this->db->select($sql);
+        $results = $query->getResultArray();
 
-    public function get_data() {
-        
+        foreach ($results as $row) {
+            echo $row['title'];
+            echo $row['name'];
+            echo $row['email'];
+        }
+        echo "GetData";
     }
 }
