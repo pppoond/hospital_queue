@@ -27,44 +27,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			</div>
 			<div class="body-home" style="height: 80vh;">
 				<div class="items1">
-					<div class="card text-center container-fluid" style="background-color: #FF8484;">
-						<div class="card-header">
-							<h1 style="font-size: 100px;color: white;">หมายเลข</h1>
-						</div>
-						<div class="card-body">
-							<div>
-								<p class="card-title" style="font-size: 9rem;font-weight: 600;color: white;">203</p>
-							</div>
-							<p class="card-title" style="font-size: 7rem;color: white;">ห้อง 2</p>
-						</div>
+					<div class="card text-center container-fluid" style="background-color: #FF8484;" id="link_qmain">
+						
 					</div>
 				</div>
 				<div class="items2">
-					<div class="in-items">
-						<?php
-						for ($i = 1; $i < 20; $i++) {
-							if ($i == 1) {
-						?>
-								<div class="card text-white" style="background-color: #FF8484;">
-									<div class="card-body" style="text-align: center;">
-										<h1 class="card-title" style="font-size: 100px;">203</h1>
-									</div>
-								</div>
-								<div style="height: 16px;"></div>
-							<?php
-							} else {
-							?>
-								<div class="card" style="background-color: white;">
-									<div class="card-body" style="text-align: center;">
-										<h1 class="card-title" style="font-size: 100px;color: #FF8484;">203</h1>
-									</div>
-								</div>
-								<div style="height: 16px;"></div>
-						<?php
-							}
-						}
-						?>
-					</div>
+					<!-- คิวลิมิต 10 -->
+					<div class="in-items" id="link_wrapper"></div>
 				</div>
 			</div>
 			<div class="bottom-home" style="height: 5vh;">
@@ -73,7 +42,36 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		</div>
 	</div>
 	<script>
+		function loadXMLDoc() {
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					document.getElementById("link_wrapper").innerHTML =
+						this.responseText;
+				}
+			};
+			xhttp.open("GET", "<?php echo site_url('home/qnumber') ?>", true);
+			xhttp.send();
+		}
 
+		function loadMainQueue() {
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					document.getElementById("link_qmain").innerHTML =
+						this.responseText;
+				}
+			};
+			xhttp.open("GET", "<?php echo site_url('home/qmain') ?>", true);
+			xhttp.send();
+		}
+		setInterval(function() {
+			loadXMLDoc();
+			loadMainQueue();
+			// 1sec
+		}, 1000);
+
+		window.onload = loadXMLDoc;
 	</script>
 </body>
 
