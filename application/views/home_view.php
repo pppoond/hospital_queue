@@ -72,7 +72,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 				</div>
 			</div>
 			<div class="bottom-home" style="height: 5vh;">
-				<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestias, porro.</p>
+				<p>xxxxxxxxxx</p>
 			</div>
 		</div>
 	</div>
