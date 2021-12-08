@@ -6,8 +6,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 <head>
 	<meta charset="utf-8">
-	<title>Welcome to CodeIgniter</title>
+	<title>โรงพยาบาลเทศบาลนครอุดรธานี</title>
 	<link rel="stylesheet" href="<?php echo base_url('assets/css/home.css'); ?>">
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap" rel="stylesheet">
 </head>
 
 <body>
