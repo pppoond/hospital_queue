@@ -7,7 +7,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <head>
 	<meta charset="utf-8">
 	<title>โรงพยาบาลเทศบาลนครอุดรธานี</title>
-	<link rel="stylesheet" href="<?php echo base_url('assets/css/home.css'); ?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/css/dental.css'); ?>">
 
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,31 +21,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 				<div class="navbar-items">
 					<img src="<?php echo base_url('assets/images/logo.png'); ?>" width="75px">
 					<div style="width: 16px;"></div>
-					<h1 style="color: white;font-weight: 400;">โรงพยาบาลเทศบาลนครอุดรธานี</h1>
+					<h1 style="color: white;font-weight: 600;">โรงพยาบาลเทศบาลนครอุดรธานี</h1>
 				</div>
-
-
-				<?php
-				// date_default_timezone_set("Asia/Bangkok");
-				// function DateThai($strDate)
-				// {
-				// 	$strYear = date("Y", strtotime($strDate)) + 543;
-				// 	$strMonth = date("n", strtotime($strDate));
-				// 	$strDay = date("j", strtotime($strDate));
-				// 	$strHour = date("H", strtotime($strDate));
-				// 	$strMinute = date("i", strtotime($strDate));
-				// 	$strSeconds = date("s", strtotime($strDate));
-				// 	$strMonthCut = array("", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
-				// 	$strMonthThai = $strMonthCut[$strMonth];
-				// 	return "$strDay $strMonthThai $strYear";
-				// }
-
-				// $strDate = date("h:i");
-				?>
-
-
 				<div style="text-align: center;">
-					<h1 style="color: white;font-weight: 400;">ทันตกรรม (Dental Division)</h1>
+					<h1 style="color: white;font-weight: 600;">ทันตกรรม (Dental Division)</h1>
 					<div style="color: white;font-size: large;font-weight: 700;border: 3px solid white;border-radius: 12px;padding: 5px;background-color: Salmon;" id="timecurrent">
 					</div>
 				</div>
@@ -53,8 +32,54 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			</div>
 			<div class="body-home" style="height: 80vh;">
 				<div class="items1">
-					<div class="card text-center container-fluid" style="background-color: #FF8484;" id="link_qmain">
+					<div class="in-items-main" id="link_page_main">
+						<div class="item-card">
+							<div class="card1">
+								<h1 style="padding: 0;margin: 0;font-weight: 600;">หมายเลข</h1>
+							</div>
+							<div class="card2">
+								<h1 style="padding: 0;margin: 0;font-weight: 600;">ห้อง</h1>
+							</div>
+						</div>
+						<div id="patient-queue-main">
+							<div class="item-card2">
+								<div class="card1">
+									<h1 style="padding: 0;margin: 0;font-weight: 600;"> <?php echo $oqueue ;?></h1>
+									<h4 style="padding: 0;margin: 0;font-weight: 600;">นายหนุม หกฟหกฟหก</h4>
+								</div>
+								<div class="card2">
+									<h2 style="padding: 0;margin: 0;font-weight: 600;">ซักประวัติทันตกรรม</h2>
+								</div>
+							</div>
+							<div class="item-card2">
+								<div class="card1">
+									<h1 style="padding: 0;margin: 0;font-weight: 600;">201</h1>
+									<h4 style="padding: 0;margin: 0;font-weight: 600;">นายโอมมมมมมมมมมมมมมม นะจ๊ะ</h4>
+								</div>
+								<div class="card2">
+									<h2 style="padding: 0;margin: 0;font-weight: 600;">ชำระเงิน</h2>
+								</div>
+							</div>
+							<div class="item-card2">
+								<div class="card1">
+									<h1 style="padding: 0;margin: 0;font-weight: 600;">201</h1>
+									<h4 style="padding: 0;margin: 0;font-weight: 600;">นายโอมมมมมมมมมมมมมมม นะจ๊ะ</h4>
+								</div>
+								<div class="card2">
+									<h2 style="padding: 0;margin: 0;font-weight: 600;">ชำระเงิน</h2>
+								</div>
+							</div>
+							<div class="item-card2">
+								<div class="card1">
+									<h1 style="padding: 0;margin: 0;font-weight: 600;">201</h1>
+									<h4 style="padding: 0;margin: 0;font-weight: 600;">นายโอมมมมมมมมมมมมมมม นะจ๊ะ</h4>
+								</div>
+								<div class="card2">
+									<h2 style="padding: 0;margin: 0;font-weight: 600;">ชำระเงิน</h2>
+								</div>
+							</div>
 
+						</div>
 					</div>
 				</div>
 				<div class="items2">
