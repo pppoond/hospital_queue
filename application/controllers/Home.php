@@ -40,6 +40,11 @@ class Home extends CI_Controller
 		}
 	}
 
+	public function timecurrent()
+	{
+		$this->load->view('pages/timecurrent');
+	}
+
 	public function getdata()
 	{
 		$query = $this->db->query('SELECT * FROM queue_table');

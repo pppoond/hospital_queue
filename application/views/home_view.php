@@ -26,28 +26,28 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 
 				<?php
-				date_default_timezone_set("Asia/Bangkok");
-				function DateThai($strDate)
-				{
-					$strYear = date("Y", strtotime($strDate)) + 543;
-					$strMonth = date("n", strtotime($strDate));
-					$strDay = date("j", strtotime($strDate));
-					$strHour = date("H", strtotime($strDate));
-					$strMinute = date("i", strtotime($strDate));
-					$strSeconds = date("s", strtotime($strDate));
-					$strMonthCut = array("", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
-					$strMonthThai = $strMonthCut[$strMonth];
-					return "$strDay $strMonthThai $strYear";
-				}
+				// date_default_timezone_set("Asia/Bangkok");
+				// function DateThai($strDate)
+				// {
+				// 	$strYear = date("Y", strtotime($strDate)) + 543;
+				// 	$strMonth = date("n", strtotime($strDate));
+				// 	$strDay = date("j", strtotime($strDate));
+				// 	$strHour = date("H", strtotime($strDate));
+				// 	$strMinute = date("i", strtotime($strDate));
+				// 	$strSeconds = date("s", strtotime($strDate));
+				// 	$strMonthCut = array("", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
+				// 	$strMonthThai = $strMonthCut[$strMonth];
+				// 	return "$strDay $strMonthThai $strYear";
+				// }
 
-				$strDate = date("h:i");
+				// $strDate = date("h:i");
 				?>
 
 
 				<div style="text-align: center;">
 					<h1 style="color: white;font-weight: 400;">แผนกผู้ป่วยนอก (OPD)</h1>
-					<p style="color: white;font-size: large;font-weight: 700;border: 3px solid white;border-radius: 12px;padding: 5px;
-					background-color: Salmon;">วันที่ <?php echo DateThai($strDate); ?> เวลา <?php echo date("h:i:s"); ?></p>
+					<div style="color: white;font-size: large;font-weight: 700;border: 3px solid white;border-radius: 12px;padding: 5px;background-color: Salmon;" id="timecurrent">
+					</div>
 				</div>
 
 			</div>
@@ -91,9 +91,25 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			xhttp.open("GET", "<?php echo site_url('home/qmain') ?>", true);
 			xhttp.send();
 		}
+
+		function timeRefresh() {
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					document.getElementById("timecurrent").innerHTML =
+						this.responseText;
+				}
+			};
+			xhttp.open("GET", "<?php echo site_url('home/timecurrent') ?>", true);
+			xhttp.send();
+		};
+
+
+
 		setInterval(function() {
 			loadXMLDoc();
 			loadMainQueue();
+			timeRefresh();
 			// 1sec
 		}, 1000);
 
