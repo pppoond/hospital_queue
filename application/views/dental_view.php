@@ -44,7 +44,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<div id="patient-queue-main">
 							<div class="item-card2">
 								<div class="card1">
-									<h1 style="padding: 0;margin: 0;font-weight: 600;"> <?php echo $oqueue ;?></h1>
+									<h1 style="padding: 0;margin: 0;font-weight: 600;">203</h1>
 									<h4 style="padding: 0;margin: 0;font-weight: 600;">นายหนุม หกฟหกฟหก</h4>
 								</div>
 								<div class="card2">
