@@ -45,7 +45,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 
 				<div style="text-align: center;">
-					<h1 style="color: white;font-weight: 400;">แผนกผู้ป่วยนอก (OPD)</h1>
+					<h1 style="color: white;font-weight: 400;">อุบัติเหตุฉุกเฉิน ER</h1>
 					<div style="color: white;font-size: large;font-weight: 700;border: 3px solid white;border-radius: 12px;padding: 5px;background-color: Salmon;" id="timecurrent">
 					</div>
 				</div>

@@ -42,6 +42,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							</div>
 						</div>
 						<div id="patient-queue-main">
+<<<<<<< HEAD
 							<div class="item-card2">
 								<div class="card1">
 									<h1 style="padding: 0;margin: 0;font-weight: 600;">203</h1>
@@ -79,6 +80,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								</div>
 							</div>
 
+=======
+							
+							
+>>>>>>> b8074465b2dc3e41ebb7346e1bf907a374419818
 						</div>
 					</div>
 				</div>
@@ -109,11 +114,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			var xhttp = new XMLHttpRequest();
 			xhttp.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
-					document.getElementById("link_qmain").innerHTML =
+					document.getElementById("patient-queue-main").innerHTML =
 						this.responseText;
 				}
 			};
-			xhttp.open("GET", "<?php echo site_url('Dental/qmain') ?>", true);
+			xhttp.open("GET", "<?php echo site_url('Dental/dental_qmain') ?>", true);
 			xhttp.send();
 		}
 
