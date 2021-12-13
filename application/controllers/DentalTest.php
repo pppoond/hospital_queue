@@ -66,7 +66,8 @@ class DentalTest extends CI_Controller
                     'vstdate' => $row->vstdate,
                     'curdep_name' => $row->curdep_name,
                     'ptname' => $row->ptname,
-                    'num_row' => $num_row
+                    'num_row' => $num_row,
+                    'cur_dep_time' => $row->cur_dep_time
                 );
                 $this->load->view('pages/dental/dental_qmain', $data);
                 $num_row++;

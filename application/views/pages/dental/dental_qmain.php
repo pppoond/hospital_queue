@@ -8,6 +8,7 @@ if ($num_row == 1) {
         </div>
         <div class="card2" style="background-color: #616EFF;color: white;">
             <h2 style="padding: 0;margin: 0;font-weight: 600;"><?php echo $curdep_name; ?></h2>
+            <h6 style="padding: 0;margin: 0;font-weight: 600;"><?php echo $cur_dep_time; ?></h6>
         </div>
     </div>
 
@@ -21,6 +22,7 @@ if ($num_row == 1) {
         </div>
         <div class="card2">
             <h2 style="padding: 0;margin: 0;font-weight: 600;"><?php echo $curdep_name; ?></h2>
+            <h6 style="padding: 0;margin: 0;font-weight: 600;"><?php echo $cur_dep_time; ?></h6>
         </div>
     </div>
 <?php
