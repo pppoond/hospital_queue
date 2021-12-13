@@ -42,7 +42,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							</div>
 						</div>
 						<div id="patient-queue-main">
-<<<<<<< HEAD
 							<div class="item-card2">
 								<div class="card1">
 									<h1 style="padding: 0;margin: 0;font-weight: 600;">203</h1>
@@ -80,10 +79,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								</div>
 							</div>
 
-=======
-							
-							
->>>>>>> b8074465b2dc3e41ebb7346e1bf907a374419818
 						</div>
 					</div>
 				</div>
@@ -97,6 +92,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			</div>
 		</div>
 	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js" integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script>
 		function loadXMLDoc() {
 			var xhttp = new XMLHttpRequest();
