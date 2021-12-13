@@ -9,7 +9,4 @@
         <div style="font-size: large;font-weight: 700;border: 3px solid white;border-radius: 12px;padding: 5px;background-color: Salmon;" id="timecurrent">
         </div>
     </div>
-    <div style="text-align: center;">
-        <?php $this->load->view('includes/department'); ?>
-    </div>
 </div>

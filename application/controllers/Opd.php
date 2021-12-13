@@ -27,7 +27,8 @@ class Opd extends CI_Controller
                 $data = array(
                     'oqueue' => $row->oqueue,
                     'vstdate' => $row->vstdate,
-                    'num_row' => $num_row
+                    'num_row' => $num_row,
+                    'sign_datetime' => $row->sign_datetime
                 );
                 $this->load->view('pages/qnumber', $data);
                 $num_row++;
@@ -48,7 +49,7 @@ class Opd extends CI_Controller
                     'curdep_name' => $row->curdep_name,
                     'ptname' => $row->ptname,
                     'num_row' => $num_row,
-                    'cur_dep_time' => $row->cur_dep_time
+                    'sign_datetime' => $row->sign_datetime
                 );
                 $this->load->view('pages/dental/dental_qmain', $data);
                 $num_row++;
