@@ -40,6 +40,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             <div class="card2">
                                 <h1 style="padding: 0;margin: 0;font-weight: 600;">ห้อง</h1>
                             </div>
+                            <div class="card3">
+                                <h1 style="padding: 0;margin: 0;font-weight: 600;">เวลาที่เรียกคิว</h1>
+                            </div>
+
                         </div>
                         <!-- คิวหลัก -->
                         <div id="patient-queue-main">
@@ -48,12 +52,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 </div>
                 <div class="items2">
                     <!-- คิวลิมิต 10 -->
-                    <div class="in-items" id="link_wrapper"></div>
+                    <!-- <div class="in-items" id="link_wrapper"></div> -->
                 </div>
             </div>
-            <div class="bottom-home">
-                เทคโนโลยีสารสนเทศ โรงพยาบาลเทศบาลนครอุดรธานี
-            </div>
+
+
+            <span class="Apple-style-span">
+                <marquee><b><span style="color: white;">พัฒนาโดย : ฝ่ายเทคโนโลยีสารสนเทศ โรงพยาบาลเทศบาลนครอุดรธานี</span></b></marquee>
+            </span>
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js" integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -76,6 +82,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 if (this.readyState == 4 && this.status == 200) {
                     document.getElementById("patient-queue-main").innerHTML =
                         this.responseText;
+
                 }
             };
             xhttp.open("GET", "<?php echo site_url('DentalTest/dental_qmain') ?>", true);
@@ -104,6 +111,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
         }, 1000);
 
         window.onload = loadXMLDoc;
+
+
+        
     </script>
 </body>
 
