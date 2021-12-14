@@ -47,7 +47,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <!-- Trigger/Open The Modal
             <button id="myBtn">Open Modal</button> -->
 
-            <button type="button" onclick="showAlert()" class="btn btn-primary" id="test">Click me</button>
+            <button type="button" onclick="showAlert()" class="btn btn-primary" id="depButton">เปลี่ยนแผนก</button>
 
             <!-- The Modal -->
             <!-- <div id="myModal" class="modal"> -->
@@ -147,31 +147,35 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
         function showAlert() {
             Swal.fire({
-                title: 'Select Outage Tier',
+                title: 'เลือกแผนก',
                 input: 'select',
                 inputOptions: {
-                    '1': 'Tier 1',
-                    '2': 'Tier 2',
-                    '3': 'Tier 3'
+                    '1': 'ทันตกรรม Dental',
+                    '2': 'อายุรกรรม OPD',
+                    '3': 'ห้องตรวจทั่วไป',
+                    '4': 'กายภาพบำบัด'
+
                 },
-                inputPlaceholder: 'required',
+                inputPlaceholder: 'กรุณาเลือกแผนก',
                 showCancelButton: true,
                 inputValidator: function(value) {
                     return new Promise(function(resolve, reject) {
                         if (value !== '') {
                             resolve();
                         } else {
-                            reject('You need to select a Tier');
+                            reject('กรุณาเลือกแผนก');
                         }
                     });
                 }
             }).then(function(result) {
                 swal({
                     type: 'success',
-                    html: 'You selected: ' + result
+                    html: 'คุณได้เลือก: ' + result.value
                 });
+            
             });
         }
+        
     </script>
 </body>
 
