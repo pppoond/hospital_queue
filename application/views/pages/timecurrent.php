@@ -8,11 +8,12 @@ function DateThai($strDate)
     $strHour = date("H", strtotime($strDate));
     $strMinute = date("i", strtotime($strDate));
     $strSeconds = date("s", strtotime($strDate));
-    $strMonthCut = array("", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
+    $strMonthCut = array("", "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", 
+    "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม");
     $strMonthThai = $strMonthCut[$strMonth];
     return "$strDay $strMonthThai $strYear";
 }
 
 $strDate = date("h:i");
 ?>
-วันที่ <?php echo DateThai($strDate); ?> เวลา <?php echo date("h:i:s"); ?>
+ <?php echo DateThai($strDate); ?>  &nbsp; &nbsp; <?php echo date("h:i:s"); ?>

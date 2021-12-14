@@ -1,7 +1,9 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
+
 ?>
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -12,6 +14,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap" rel="stylesheet">
+    <script src="sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="sweetalert2.min.css">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -39,6 +44,29 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 </div>
 
             </div>
+
+            <!-- Trigger/Open The Modal
+            <button id="myBtn">Open Modal</button> -->
+
+            <button id="test">Click me</button>
+
+            <!-- The Modal -->
+            <div id="myModal" class="modal">
+
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+
+                    <p>Some text in the Modal..</p>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+
             <?php $this->load->view('includes/footer'); ?>
         </div>
     </div>
@@ -90,6 +118,43 @@ defined('BASEPATH') or exit('No direct script access allowed');
         }, 1000);
 
         window.onload = loadXMLDoc;
+
+
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("myBtn");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks the button, open the modal 
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        $('#test').click(function() {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Your work has been saved',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        });
     </script>
 </body>
 
