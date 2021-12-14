@@ -55,7 +55,7 @@ class Opd extends CI_Controller
                 $num_row++;
             }
         } else {
-            echo "<div style='text-align: center;width: 100%;'><h1>ไม่มีคิว</h1></div>";
+            echo "<div style='text-align: center;width: 100%; color:red ; margin:75px; font-weight: 900;' ><h1>ไม่มีคิว</h1></div>";
         }
     }
 
