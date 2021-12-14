@@ -14,9 +14,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap" rel="stylesheet">
-    <script src="sweetalert2.min.js"></script>
-    <link rel="stylesheet" href="sweetalert2.min.css">
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -49,6 +46,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <button id="myBtn">Open Modal</button> -->
 
             <button id="test">Click me</button>
+            <button onclick="showAlert()">Show Alert</button>
 
             <!-- The Modal -->
             <div id="myModal" class="modal">
@@ -70,6 +68,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <?php $this->load->view('includes/footer'); ?>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.0/dist/sweetalert2.all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js" integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         function loadXMLDoc() {
@@ -144,6 +143,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
             if (event.target == modal) {
                 modal.style.display = "none";
             }
+        }
+
+        function showAlert() {
+            Swal.fire({
+                position: 'bottom-end',
+                showCloseButton: true,
+                title: 'Speciality',
+                showConfirmButton: false,
+            });
         }
 
         $('#test').click(function() {
