@@ -14,7 +14,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap" rel="stylesheet">
-    <script src="sweetalert2.min.js"></script>
     <link rel="stylesheet" href="sweetalert2.min.css">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -48,13 +47,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <!-- Trigger/Open The Modal
             <button id="myBtn">Open Modal</button> -->
 
-            <button id="test">Click me</button>
+            <button type="button" onclick="showAlert()" class="btn btn-primary" id="test">Click me</button>
 
             <!-- The Modal -->
-            <div id="myModal" class="modal">
+            <!-- <div id="myModal" class="modal"> -->
 
-                <!-- Modal content -->
-                <div class="modal-content">
+            <!-- Modal content -->
+            <!-- <div class="modal-content">
                     <span class="close">&times;</span>
 
                     <p>Some text in the Modal..</p>
@@ -65,7 +64,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     </div>
                 </div>
 
-            </div>
+            </div> -->
 
             <?php $this->load->view('includes/footer'); ?>
         </div>
@@ -146,15 +145,33 @@ defined('BASEPATH') or exit('No direct script access allowed');
             }
         }
 
-        $('#test').click(function() {
+        function showAlert() {
             Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'Your work has been saved',
-                showConfirmButton: false,
-                timer: 1500
+                title: 'Select Outage Tier',
+                input: 'select',
+                inputOptions: {
+                    '1': 'Tier 1',
+                    '2': 'Tier 2',
+                    '3': 'Tier 3'
+                },
+                inputPlaceholder: 'required',
+                showCancelButton: true,
+                inputValidator: function(value) {
+                    return new Promise(function(resolve, reject) {
+                        if (value !== '') {
+                            resolve();
+                        } else {
+                            reject('You need to select a Tier');
+                        }
+                    });
+                }
+            }).then(function(result) {
+                swal({
+                    type: 'success',
+                    html: 'You selected: ' + result
+                });
             });
-        });
+        }
     </script>
 </body>
 
