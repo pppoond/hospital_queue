@@ -38,33 +38,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 </div>
 
             </div>
-<<<<<<< HEAD
-
-            <!-- Trigger/Open The Modal
-            <button id="myBtn">Open Modal</button> -->
-
-            <button type="button" onclick="showAlert()" class="btn btn-primary" id="depButton">เปลี่ยนแผนก</button>
-
-            <!-- The Modal -->
-            <div id="myModal" class="modal">
-
-                <!-- Modal content -->
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-
-                    <p>Some text in the Modal..</p>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-
-            </div> -->
-
-=======
             <!-- <button type="button" onclick="showAlert()" class="btn btn-primary" id="test">Click me</button> -->
->>>>>>> 7fa2838614ab1cb6ce7d887e8779259c81b0aacd
             <?php $this->load->view('includes/footer'); ?>
         </div>
     </div>
@@ -113,7 +87,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 
 
-        <? } ?>
+        <?php } ?>
 
         </div>
 
@@ -275,7 +249,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 if (event.target == modal) {
                     modal.style.display = "none";
                 }
-                
             }
 
             // --------------------Modal-----------------------
