@@ -50,10 +50,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <button type="button" onclick="showAlert()" class="btn btn-primary" id="depButton">เปลี่ยนแผนก</button>
 
             <!-- The Modal -->
-            <!-- <div id="myModal" class="modal"> -->
+            <div id="myModal" class="modal">
 
-            <!-- Modal content -->
-            <!-- <div class="modal-content">
+                <!-- Modal content -->
+                <div class="modal-content">
                     <span class="close">&times;</span>
 
                     <p>Some text in the Modal..</p>
@@ -172,10 +172,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     type: 'success',
                     html: 'คุณได้เลือก: ' + result.value
                 });
-            
+
             });
         }
-        
     </script>
 </body>
 
