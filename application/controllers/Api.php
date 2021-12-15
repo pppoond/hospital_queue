@@ -20,21 +20,15 @@ class Api extends CI_Controller
     {
         header('Content-Type: application/json;charset=utf-8');
         if ($_SERVER['REQUEST_METHOD'] == "GET") {
-
             $data_arr = array();
             $data_arr['result'] = array();
-
-            $query =  $this->Speciality_model->getData();
-            // foreach ($query->result() as $row) {
-            //     $data_items = array(
-            //         'spclty' => $row->spclty,
-            //     );
-            //     array_push($data_arr['result'], $data_items);
-            // }
-            echo json_encode($query->result(), JSON_UNESCAPED_UNICODE);
+            $query =  $this->Speciality_model->getData(); //ดึงข้อมูลจาก model Speciality_model
+            echo json_encode($query->result(), JSON_UNESCAPED_UNICODE); //แสดงข้อมูลเป็น json
             http_response_code(200);
             exit();
         } else {
+            http_response_code(405);
+            exit();
         }
     }
 
