@@ -8,7 +8,8 @@ class Home extends CI_Controller
 	public function index()
 	{
 		$this->load->view('includes/css');
-		$this->load->view('home_view');
+
+		$this->load->view('speech_view2');
 	}
 
 	public function qnumber()

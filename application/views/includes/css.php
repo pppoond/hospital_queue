@@ -7,4 +7,8 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <script src="sweetalert2.min.js"></script>
+
+<script src="assets/js/speech.js"></script>
+<script src="speech.js"></script>
+
 <link rel="stylesheet" href="sweetalert2.min.css">
