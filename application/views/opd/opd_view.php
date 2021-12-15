@@ -10,14 +10,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <meta charset="utf-8">
     <title>โรงพยาบาลเทศบาลนครอุดรธานี</title>
     <link rel="stylesheet" href="<?php echo base_url('assets/css/opd.css'); ?>">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <div class="container-main">
+
         <div class="container-home">
             <?php $this->load->view('includes/header'); ?>
             <div class="body-home" style="height: 80vh;">
@@ -41,47 +38,42 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 </div>
 
             </div>
-
-            <!-- Trigger/Open The Modal
-            <button id="myBtn">Open Modal</button> -->
-
-            <button id="test">Click me</button>
-            <button onclick="showAlert()">Show Alert</button>
-
-            <!-- The Modal -->
-            <div id="myModal" class="modal">
-
-                <!-- Modal content -->
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-
-                    <p>Some text in the Modal..</p>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-
-            </div>
-
+            <!-- <button type="button" onclick="showAlert()" class="btn btn-primary" id="test">Click me</button> -->
             <?php $this->load->view('includes/footer'); ?>
         </div>
+
+        <!-- The Modal -->
+        <div class="modal" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Modal Heading</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        Modal body..
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
     </div>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+        Open modal
+    </button>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.0/dist/sweetalert2.all.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js" integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-        function loadXMLDoc() {
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    document.getElementById("link_wrapper").innerHTML =
-                        this.responseText;
-                }
-            };
-            xhttp.open("GET", "<?php echo site_url('Opd/qnumber') ?>", true);
-            xhttp.send();
-        }
+        var data = {};
 
         function loadMainQueue() {
             var xhttp = new XMLHttpRequest();
@@ -110,59 +102,97 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 
         setInterval(function() {
-            loadXMLDoc();
             loadMainQueue();
             timeRefresh();
             // 1sec
         }, 1000);
 
-        window.onload = loadXMLDoc;
-
 
         // Get the modal
-        var modal = document.getElementById("myModal");
+        // var modal = document.getElementById("myModal");
 
         // Get the button that opens the modal
-        var btn = document.getElementById("myBtn");
+        // var btn = document.getElementById("myBtn");
 
         // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
+        // var span = document.getElementsByClassName("close")[0];
 
         // When the user clicks the button, open the modal 
-        btn.onclick = function() {
-            modal.style.display = "block";
-        }
+        // btn.onclick = function() {
+        //     modal.style.display = "block";
+        // }
 
         // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
+        // span.onclick = function() {
+        //     modal.style.display = "none";
+        // }
 
         // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
+        // window.onclick = function(event) {
+        //     if (event.target == modal) {
+        //         modal.style.display = "none";
+        //     }
+        // }
 
-        function showAlert() {
+        async function showAlert() {
+
+            var data;
+
+            var uri = '<?php echo site_url('Api/spclty') ?>';
+
+            axios.get(uri).then(function(response) {
+                // showData.innerHTML = response.data;
+                console.log(response.data);
+
+            }).catch((err) => console.log(err));
+
+            var data = {
+                '1': 'สองโหล',
+                '2': 'สามโหล'
+            };
             Swal.fire({
-                position: 'bottom-end',
-                showCloseButton: true,
-                title: 'Speciality',
-                showConfirmButton: false,
+                title: 'Select Outage Tier',
+                input: 'select',
+                inputOptions: data,
+                inputPlaceholder: 'required',
+                showCancelButton: true,
+                inputValidator: function(value) {
+                    return new Promise(function(resolve, reject) {
+                        if (value !== '') {
+                            resolve();
+                        } else {
+                            reject('You need to select a Tier');
+                        }
+                    });
+                }
+            }).then(function(result) {
+                showAlert2();
             });
         }
 
-        $('#test').click(function() {
+        async function showAlert2() {
             Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'Your work has been saved',
-                showConfirmButton: false,
-                timer: 1500
+                title: 'asdasd',
+                input: 'select',
+                inputOptions: data,
+                inputPlaceholder: 'required',
+                showCancelButton: true,
+                inputValidator: function(value) {
+                    return new Promise(function(resolve, reject) {
+                        if (value !== '') {
+                            resolve();
+                        } else {
+                            reject('You need to select a Tier');
+                        }
+                    });
+                }
+            }).then(function(result) {
+                swal({
+                    type: 'success',
+                    html: 'You selected: ' + result
+                });
             });
-        });
+        }
     </script>
 </body>
 

@@ -1,9 +1,10 @@
 <div class="d-flex">
-    <button type="button" data-toggle="modal" data-target="#exampleModalCenter">
+    <a type="button" onclick="showAlert()">
         <i class="fas fa-users-cog fa-2x icon-hover"></i>
-    </button>
+    </a>
 </div>
 
-
-
-<!-- Modal -->
+<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+    Launch demo modal
+</button> -->
