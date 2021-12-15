@@ -275,6 +275,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 if (event.target == modal) {
                     modal.style.display = "none";
                 }
+                
             }
 
             // --------------------Modal-----------------------
