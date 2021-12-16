@@ -31,8 +31,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 <h1 style="padding: 0;margin: 0;font-weight: 600;">เวลาที่เรียกคิว</h1>
                             </div>
                         </div>
+
                         <!-- คิวหลัก -->
                         <div id="patient-queue-main">
+
                         </div>
                     </div>
                 </div>
@@ -45,7 +47,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 
     <?php
-    $url = 'http://localhost/ci/api/spclty';;
+    $url = 'http://localhost/hospital_queue/api/spclty';;
     $content = file_get_contents($url);
     $json = json_decode($content, true);
 
@@ -87,7 +89,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 
 
-        <? } ?>
+        <?php } ?>
 
         </div>
 
@@ -251,7 +253,64 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 }
             }
 
-            // --------------------Modal-----------------------
+            // --------------------Modal-----------------------\
+
+
+            // --------------------Speech funtion-----------------------\
+
+
+            const textarea = document.querySelector("textarea"),
+                voiceList = document.querySelector("select"),
+                speechBtn = document.querySelector("button");
+
+            let synth = speechSynthesis,
+                isSpeaking = true;
+
+            voices();
+
+            function voices() {
+
+                for (let voice of synth.getVoices()) {
+                    let selected = voice.name === "Microsoft Pattara - Thai (Thailand)" ? "selected" : "";
+                    //let option = `<option value="${voice.name}" ${selected}>${voice.name} (${voice.lang})</option>`;
+                    //voiceList.insertAdjacentHTML("beforeend", option);
+                }
+            }
+
+            synth.addEventListener("voiceschanged", voices);
+
+            function textToSpeech(text) {
+                let utterance = new SpeechSynthesisUtterance(text);
+                synth.speak(utterance);
+            }
+
+            speechBtn.addEventListener("click", e => {
+                e.preventDefault();
+                if (textarea.value !== "") {
+                    if (!synth.speaking) {
+                        textToSpeech(textarea.value);
+                    }
+                    if (textarea.value.length > 80) {
+                        setInterval(() => {
+                            if (!synth.speaking && !isSpeaking) {
+                                isSpeaking = true;
+                                speechBtn.innerText = "Convert To Speech";
+                            } else {}
+                        }, 500);
+                        if (isSpeaking) {
+                            synth.resume();
+                            isSpeaking = false;
+                            speechBtn.innerText = "Pause Speech";
+                        } else {
+                            synth.pause();
+                            isSpeaking = true;
+                            speechBtn.innerText = "Resume Speech";
+                        }
+                    } else {
+                        speechBtn.innerText = "Convert To Speech";
+                    }
+                }
+            });
         </script>
 </body>
 
