@@ -44,274 +44,129 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <?php $this->load->view('includes/footer'); ?>
         </div>
     </div>
+    <!-- Trigger/Open The Modal -->
+    <!-- <button id="ButtonDep">เลือกรายการ</button> -->
 
-
-    <?php
-    $url = 'http://localhost/hospital_queue/api/spclty';;
-    $content = file_get_contents($url);
-    $json = json_decode($content, true);
-
-    foreach ($json as $item) {
-
-
-    ?>
-
-        <!-- Trigger/Open The Modal -->
-        <!-- <button id="ButtonDep">เลือกรายการ</button> -->
-
-        <!-- The Modal -->
-        <div id="myModal" class="modal" data-backdrop="false">
-
-            <!-- Modal content -->
-            <div class="modal-content">
-
-                <div class="modal-header">
-                    <h4 class="modal-title">กรุณาเลือกแผนก</h4>
-                    <button type="button" class="close" data-dismiss="modal">×</button>
-
-
-                </div>
-
-                <div class="modal-body">
-                    <select id="dep_select" name="dep_select" class="form-control">
-                        <option value="Dental"> <?php echo "<p>{$item['name']}</p>"; ?></option>
-                    </select>
-                </div>
-
-                <div class="modal-footer">
-                    <form method="post" action="opd">
-                        <a href="dental" class="btn btn-primary">ยืนยันรายการ</a>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">ปิดหน้าต่าง</button>
-                    </form>
-                </div>
+    <!-- The Modal -->
+    <div id="myModal" class="modal" data-backdrop="false">
+        <!-- Modal content -->
+        <div class="modal-content col-4">
+            <div class="modal-header">
+                <h4 class="modal-title">กรุณาเลือกแผนก</h4>
+                <button type="button" class="close" data-dismiss="modal">×</button>
             </div>
-
-
-
-
-        <?php } ?>
-
+            <div class="modal-body">
+                <select id="dep_select" name="dep_select" class="form-control">
+                    <!-- <option value="Dental"> <?php echo "<p>{$item['name']}</p>"; ?></option> -->
+                </select>
+            </div>
+            <div class="modal-footer">
+                <a onclick="findBySpclty()" class="btn btn-primary">ยืนยันรายการ</a>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">ปิดหน้าต่าง</button>
+            </div>
         </div>
+    </div>
 
-        </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.0/dist/sweetalert2.all.min.js"></script>
+    <script>
+        var data = {};
 
-
-
-
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.0/dist/sweetalert2.all.min.js"></script>
-        <script>
-            var data = {};
-
-            function loadMainQueue() {
-                var xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                        document.getElementById("patient-queue-main").innerHTML =
-                            this.responseText;
-                    }
-                };
-                xhttp.open("GET", "<?php echo site_url('Opd/dental_qmain') ?>", true);
-                xhttp.send();
-            }
-
-            function timeRefresh() {
-                var xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                        document.getElementById("timecurrent").innerHTML =
-                            this.responseText;
-                    }
-                };
-                xhttp.open("GET", "<?php echo site_url('Dental/timecurrent') ?>", true);
-                xhttp.send();
+        function loadMainQueue() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("patient-queue-main").innerHTML =
+                        this.responseText;
+                }
             };
+            xhttp.open("GET", "<?php echo site_url('Opd/dental_qmain') ?>", true);
+            xhttp.send();
+        }
 
-
-
-            setInterval(function() {
-                loadMainQueue();
-                timeRefresh();
-                // 1sec
-            }, 1000);
-
-
-
-            // Get the modal
-            // var modal = document.getElementById("myModal");
-
-            // Get the button that opens the modal
-            // var btn = document.getElementById("myBtn");
-
-            // Get the <span> element that closes the modal
-            // var span = document.getElementsByClassName("close")[0];
-
-            // When the user clicks the button, open the modal 
-            // btn.onclick = function() {
-            //     modal.style.display = "block";
-            // }
-
-            // When the user clicks on <span> (x), close the modal
-            // span.onclick = function() {
-            //     modal.style.display = "none";
-            // }
-
-            // When the user clicks anywhere outside of the modal, close it
-            // window.onclick = function(event) {
-            //     if (event.target == modal) {
-            //         modal.style.display = "none";
-            //     }
-            // }
-
-            // async function showAlert() {
-
-            //     var data;
-
-            //     var uri = '<?php echo site_url('Api/spclty') ?>';
-
-            //     axios.get(uri).then(function(response) {
-            //         // showData.innerHTML = response.data;
-            //         console.log(response.data);
-
-            //     }).catch((err) => console.log(err));
-
-            //     var data = {
-            //         '1': 'สองโหล',
-            //         '2': 'สามโหล'
-            //     };
-            //     Swal.fire({
-            //         title: 'Select Outage Tier',
-            //         input: 'select',
-            //         inputOptions: data,
-            //         inputPlaceholder: 'required',
-            //         showCancelButton: true,
-            //         inputValidator: function(value) {
-            //             return new Promise(function(resolve, reject) {
-            //                 if (value !== '') {
-            //                     resolve();
-            //                 } else {
-            //                     reject('You need to select a Tier');
-            //                 }
-            //             });
-            //         }
-            //     }).then(function(result) {
-            //         showAlert2();
-            //     });
-            // }
-
-            async function showAlert2() {
-                Swal.fire({
-                    title: 'asdasd',
-                    input: 'select',
-                    inputOptions: data,
-                    inputPlaceholder: 'required',
-                    showCancelButton: true,
-                    inputValidator: function(value) {
-                        return new Promise(function(resolve, reject) {
-                            if (value !== '') {
-                                resolve();
-                            } else {
-                                reject('You need to select a Tier');
-                            }
-                        });
-                    }
-                }).then(function(result) {
-                    swal({
-                        type: 'success',
-                        html: 'You selected: ' + result
-                    });
-                });
-            }
-
-
-
-            // --------------------Modal-----------------------
-
-
-            // Get the modal
-            var modal = document.getElementById("myModal");
-
-            // // Get the button that opens the modal
-            // var btn = document.getElementById("ButtonDep");
-
-            // // Get the <span> element that closes the modal
-            // var span = document.getElementsByClassName("close")[0];
-
-            // // When the user clicks on the button, open the modal
-            // btn.onclick = function() {
-            //     modal.style.display = "block";
-            // }
-
-            // // When the user clicks on <span> (x), close the modal
-            // span.onclick = function() {
-            //     modal.style.display = "none";
-            // }
-
-            // When the user clicks anywhere outside of the modal, close it
-            window.onclick = function(event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
+        function timeRefresh() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("timecurrent").innerHTML =
+                        this.responseText;
                 }
-            }
+            };
+            xhttp.open("GET", "<?php echo site_url('Dental/timecurrent') ?>", true);
+            xhttp.send();
+        };
 
-            // --------------------Modal-----------------------\
+        setInterval(function() {
+            loadMainQueue();
+            timeRefresh();
+            // 1sec
+        }, 1000);
 
+        function checkDataByTime() {
 
-            // --------------------Speech funtion-----------------------\
+        }
 
-
-            const textarea = document.querySelector("textarea"),
-                voiceList = document.querySelector("select"),
-                speechBtn = document.querySelector("button");
-
-            let synth = speechSynthesis,
-                isSpeaking = true;
-
-            voices();
-
-            function voices() {
-
-                for (let voice of synth.getVoices()) {
-                    let selected = voice.name === "Microsoft Pattara - Thai (Thailand)" ? "selected" : "";
-                    //let option = `<option value="${voice.name}" ${selected}>${voice.name} (${voice.lang})</option>`;
-                    //voiceList.insertAdjacentHTML("beforeend", option);
-                }
-            }
-
-            synth.addEventListener("voiceschanged", voices);
-
-            function textToSpeech(text) {
-                let utterance = new SpeechSynthesisUtterance(text);
-                synth.speak(utterance);
-            }
-
-            speechBtn.addEventListener("click", e => {
-                e.preventDefault();
-                if (textarea.value !== "") {
-                    if (!synth.speaking) {
-                        textToSpeech(textarea.value);
-                    }
-                    if (textarea.value.length > 80) {
-                        setInterval(() => {
-                            if (!synth.speaking && !isSpeaking) {
-                                isSpeaking = true;
-                                speechBtn.innerText = "Convert To Speech";
-                            } else {}
-                        }, 500);
-                        if (isSpeaking) {
-                            synth.resume();
-                            isSpeaking = false;
-                            speechBtn.innerText = "Pause Speech";
+        async function showAlert2() {
+            Swal.fire({
+                title: 'asdasd',
+                input: 'select',
+                inputOptions: data,
+                inputPlaceholder: 'required',
+                showCancelButton: true,
+                inputValidator: function(value) {
+                    return new Promise(function(resolve, reject) {
+                        if (value !== '') {
+                            resolve();
                         } else {
-                            synth.pause();
-                            isSpeaking = true;
-                            speechBtn.innerText = "Resume Speech";
+                            reject('You need to select a Tier');
                         }
-                    } else {
-                        speechBtn.innerText = "Convert To Speech";
-                    }
+                    });
                 }
+            }).then(function(result) {
+                swal({
+                    type: 'success',
+                    html: 'You selected: ' + result
+                });
             });
-        </script>
+        }
+
+        var data;
+
+        var spcltySelect = document.getElementById('dep_select');
+
+        async function getSpclty() {
+            data = [];
+            var html;
+            var uri = '<?php echo site_url('Api/spclty') ?>';
+
+            //axios เป็น library สำหรับ ดึงข้อมูล api
+            axios.get(uri).then(function(response) {
+                html = ``;
+
+                //foreach ลูป ข้อมูลจาก json array มาเก็บใส่ html และ data (เก็บไว้ก่อน ยังไม่ได้ใช้อะไร)
+                response.data.forEach(element => {
+                    html += `<option value="${element.spclty}">${element.name} ${element.spname == null ? '' : '(' + element.spname + ')'}</option>`;
+                    data.push(element); //push ข้อมูลเข้า array
+                });
+                spcltySelect.innerHTML = html;
+            }).catch((err) => console.log(err));
+        }
+
+        function findBySpclty() {
+            var spcltySelectValue = document.getElementById('dep_select');
+        }
+
+        // --------------------Modal-----------------------
+
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 </body>
 
 </html>
