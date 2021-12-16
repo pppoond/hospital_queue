@@ -9,6 +9,7 @@ class Api extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Speciality_model');
+        $this->load->model('Ovst_model');
     }
 
     public function index()
@@ -23,6 +24,22 @@ class Api extends CI_Controller
             $data_arr = array();
             $data_arr['result'] = array();
             $query =  $this->Speciality_model->getData(); //ดึงข้อมูลจาก model Speciality_model
+            echo json_encode($query->result(), JSON_UNESCAPED_UNICODE); //แสดงข้อมูลเป็น json
+            http_response_code(200);
+            exit();
+        } else {
+            http_response_code(405);
+            exit();
+        }
+    }
+
+    public function ovst()
+    {
+        header('Content-Type: application/json;charset=utf-8');
+        if ($_SERVER['REQUEST_METHOD'] == "GET") {
+            $data_arr = array();
+            $data_arr['result'] = array();
+            $query =  $this->Ovst_model->getData(); //ดึงข้อมูลจาก model Speciality_model
             echo json_encode($query->result(), JSON_UNESCAPED_UNICODE); //แสดงข้อมูลเป็น json
             http_response_code(200);
             exit();

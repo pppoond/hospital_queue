@@ -1,4 +1,4 @@
-<div class="d-flex">
+<div id="setting-btn">
     <a type="button" onclick="getSpclty()">
         <i class="fas fa-users-cog fa-2x icon-hover" data-toggle="modal" data-target="#myModal"></i>
     </a>

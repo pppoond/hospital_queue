@@ -25,15 +25,33 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 <h1 style="padding: 0;margin: 0;font-weight: 600;">หมายเลข</h1>
                             </div>
                             <div class="card2">
-                                <h1 style="padding: 0;margin: 0;font-weight: 600;">ห้อง</h1>
+                                <h1 style="padding: 0;margin: 0;font-weight: 600;">คำสั่ง</h1>
                             </div>
-                            <div class="card3">
-                                <h1 style="padding: 0;margin: 0;font-weight: 600;">เวลาที่เรียกคิว</h1>
-                            </div>
-                            <audio id="audio" src="<?php echo base_url('assets/sound/bell.wav'); ?>"></audio>
                         </div>
                         <!-- คิวหลัก -->
                         <div id="patient-queue-main">
+                            <div class="item-card2">
+                                <div class="card1">
+                                    <h1 style="padding: 0;margin: 0;font-weight: 600;">202</h1>
+                                    <h4 style="padding: 0;margin: 0;font-weight: 600;">นายทองดี</h4>
+                                </div>
+                                <div class="card2 d-flex flex-row">
+                                    <button type="button" class="btn btn-primary btn-lg mr-1">เรียกคิว</button>
+                                    <button type="button" class="btn btn-warning btn-lg mr-1">รอคิว</button>
+                                    <button type="button" class="btn btn-success btn-lg mr-1">ถัดไป</button>
+                                </div>
+                            </div>
+                            <div class="item-card2">
+                                <div class="card1">
+                                    <h1 style="padding: 0;margin: 0;font-weight: 600;">203</h1>
+                                    <h4 style="padding: 0;margin: 0;font-weight: 600;">นางสาวสาวิณี</h4>
+                                </div>
+                                <div class="card2 d-flex flex-row">
+                                    <button type="button" class="btn btn-primary btn-lg mr-1">เรียกคิว</button>
+                                    <button type="button" class="btn btn-warning btn-lg mr-1">รอคิว</button>
+                                    <button type="button" class="btn btn-success btn-lg mr-1">ถัดไป</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -58,7 +76,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 </select>
             </div>
             <div class="modal-footer">
-                <a onclick="play()" class="btn btn-primary">ยืนยันรายการ</a>
+                <a onclick="findBySpclty()" class="btn btn-primary">ยืนยันรายการ</a>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">ปิดหน้าต่าง</button>
             </div>
         </div>
@@ -67,48 +85,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.0/dist/sweetalert2.all.min.js"></script>
     <script>
         var data = {};
-        var currentQueueTime;
-
-        settingBtn = document.getElementById('setting-btn');
-
-
-        //กด keyboard จะเข้าฟังชั่น
-        document.onkeydown = function(event) {
-            if (event.keyCode == "90") {
-                play();
-            }
-        }
-
-        window.onresize = function(event) {
-            var maxHeight = window.screen.height,
-                maxWidth = window.screen.width,
-                curHeight = window.innerHeight,
-                curWidth = window.innerWidth;
-
-            if (maxWidth == curWidth && maxHeight == curHeight) {
-                console.log('F11');
-
-                settingBtn.style.display = "none";
-            } else {
-                settingBtn.style.display = "flex";
-            }
-        }
-
-        function loadMainQueue() {
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    document.getElementById("patient-queue-main").innerHTML =
-                        this.responseText;
-                }
-            };
-            xhttp.open("GET", "<?php echo site_url('Opd/dental_qmain') ?>", true);
-            xhttp.send();
-        }
-
-        loadMainQueue();
-
-
 
         function timeRefresh() {
             var xhttp = new XMLHttpRequest();
@@ -123,41 +99,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
         };
 
         setInterval(function() {
+            loadMainQueue();
             timeRefresh();
             // 1sec
-        }, 500);
+        }, 1000);
 
-        setInterval(function() {
-            checkDataByTime();
-        }, 2000);
+        function checkDataByTime() {
 
-        async function checkDataByTime() {
-            var uri = '<?php echo site_url('Api/ovst/') ?>';
-            axios.get(uri).then(function(response) {
-                if (currentQueueTime != null) {
-                    if (response.data[0]['sign_datetime'] != currentQueueTime) {
-                        try {
-                            console.log('New Data');
-                            currentQueueTime = response.data[0]['sign_datetime'];
-                            loadMainQueue();
-                            play();
-                        } catch (error) {
-                            console.log(error);
-                        }
-
-                    } else {
-                        // nothing
-                        console.log('Nothing');
-                    }
-                } else {
-                    currentQueueTime = response.data[0]['sign_datetime'];
-                }
-            }).catch((err) => console.log(err));
-        }
-
-        function play() {
-            var audio = document.getElementById("audio");
-            audio.play();
         }
 
         async function showAlert2() {
