@@ -16,7 +16,7 @@
 <body>
     <div class="wrapper">
         <header>INSERT TEXT</header>
-        <!-- <form action="#">
+        <form action="#">
             <div class="row">
 
 
@@ -28,22 +28,23 @@
                 foreach ($json as $item) {
                 ?>
 
-                    <textarea>   <?php echo "เชิญหมายเลข{$item['oqueue']}ที่ห้อง{$item['curdep_name']}ครับ"; ?>   </textarea>
-            </div> -->
+                    <textarea>   <?php echo "เชิญหมายเลข{$item['oqueue']}ที่ห้อง{$item['curdep_name']}"; ?>   </textarea>
+            </div>
 
-        <form action="#">
+         <!-- <form action="#">
             <div class="row">
                 <label>Enter Text</label>
                 <textarea></textarea>
-            </div>
+            </div> -->
             <div class="row">
                 <label>Select Voice</label>
                 <div class="outer">
                     <select></select>
                 </div>
-            </div>
+            </div> 
+                <!-- </form> -->
             <button>Convert To Speech</button>
-            <!-- </form> -->
+            
 
 
 
@@ -64,7 +65,8 @@
 
     function voices() {
         for (let voice of synth.getVoices()) {
-            let selected = voice.name === "Google US English" ? "selected" : "";
+            // let selected = voice.name === "Google US English" ? "selected" : "";
+            let selected = voice.name === "Microsoft Pattara - Thai (Thailand)" ? "selected" : "";
             let option = `<option value="${voice.name}" ${selected}>${voice.name} (${voice.lang})</option>`;
             voiceList.insertAdjacentHTML("beforeend", option);
         }
