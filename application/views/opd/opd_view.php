@@ -31,8 +31,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 <h1 style="padding: 0;margin: 0;font-weight: 600;">เวลาที่เรียกคิว</h1>
                             </div>
                         </div>
+
                         <!-- คิวหลัก -->
                         <div id="patient-queue-main">
+
                         </div>
                     </div>
                 </div>
