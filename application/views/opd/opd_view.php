@@ -45,7 +45,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 
     <?php
-    $url = 'http://localhost/ci/api/spclty';;
+    $url = 'http://localhost/hospital_queue/api/spclty';;
     $content = file_get_contents($url);
     $json = json_decode($content, true);
 
