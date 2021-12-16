@@ -43,7 +43,7 @@ WHERE
 	AND o.vstdate >= CURDATE() 
 ORDER BY
 	sign_datetime DESC 
-	LIMIT 10
+	LIMIT 5
         ";
         $query = $this->db->query($sql);
         return $query;

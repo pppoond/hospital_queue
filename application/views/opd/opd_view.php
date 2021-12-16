@@ -32,8 +32,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             </div>
                             <audio id="audio" src="<?php echo base_url('assets/sound/bell.wav'); ?>"></audio>
                         </div>
+
                         <!-- คิวหลัก -->
                         <div id="patient-queue-main">
+
                         </div>
                     </div>
                 </div>
