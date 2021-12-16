@@ -16,7 +16,7 @@
 <body>
     <div class="wrapper">
         <header>INSERT TEXT</header>
-        <form action="#">
+        <!-- <form action="#">
             <div class="row">
 
 
@@ -29,13 +29,23 @@
                 ?>
 
                     <textarea>   <?php echo "เชิญหมายเลข{$item['oqueue']}ที่ห้อง{$item['curdep_name']}ครับ"; ?>   </textarea>
-            </div>
+            </div> -->
 
-            <div class="row ">
-                <button>Convert To Speech</button>
+        <form action="#">
+            <div class="row">
+                <label>Enter Text</label>
+                <textarea></textarea>
             </div>
+            <div class="row">
+                <label>Select Voice</label>
+                <div class="outer">
+                    <select></select>
+                </div>
+            </div>
+            <button>Convert To Speech</button>
+            <!-- </form> -->
 
-         
+
 
         </form>
     </div>
@@ -44,34 +54,32 @@
 <?php } ?>
 
 
-<script src="speech.js"></script>
-
 <script>
     const textarea = document.querySelector("textarea"),
         voiceList = document.querySelector("select"),
         speechBtn = document.querySelector("button");
-
     let synth = speechSynthesis,
         isSpeaking = true;
-
     voices();
 
     function voices() {
-
         for (let voice of synth.getVoices()) {
-            let selected = voice.name === "Microsoft Pattara - Thai (Thailand)" ? "selected" : "";
-            //let option = `<option value="${voice.name}" ${selected}>${voice.name} (${voice.lang})</option>`;
-            //voiceList.insertAdjacentHTML("beforeend", option);
+            let selected = voice.name === "Google US English" ? "selected" : "";
+            let option = `<option value="${voice.name}" ${selected}>${voice.name} (${voice.lang})</option>`;
+            voiceList.insertAdjacentHTML("beforeend", option);
         }
     }
-
     synth.addEventListener("voiceschanged", voices);
 
     function textToSpeech(text) {
         let utterance = new SpeechSynthesisUtterance(text);
+        for (let voice of synth.getVoices()) {
+            if (voice.name === voiceList.value) {
+                utterance.voice = voice;
+            }
+        }
         synth.speak(utterance);
     }
-
     speechBtn.addEventListener("click", e => {
         e.preventDefault();
         if (textarea.value !== "") {
