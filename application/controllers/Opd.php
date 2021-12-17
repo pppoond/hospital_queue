@@ -13,10 +13,11 @@ class Opd extends CI_Controller
 
     public function index()
     {
+        $this->load->helper('url');
+        $this->load->library('javascript');
         $this->load->view('includes/css');
         $this->load->view('opd/opd_view');
         $this->load->view('includes/js');
-
     }
 
     public function qnumber()

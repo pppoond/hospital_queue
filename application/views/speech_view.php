@@ -16,12 +16,12 @@
 <body>
     <div class="wrapper">
         <header>INSERT TEXT</header>
-        <form action="#">
+        <form>
             <div class="row">
 
 
                 <?php
-                $url = 'http://localhost/hospital_queue/api_speech/speechapi';;
+                $url = 'http://localhost/ci/api_speech/speechapi';;
                 $content = file_get_contents($url);
                 $json = json_decode($content, true);
 
@@ -31,7 +31,7 @@
                     <textarea>   <?php echo "เชิญหมายเลข{$item['oqueue']}ที่ห้อง{$item['curdep_name']}"; ?>   </textarea>
             </div>
 
-         <!-- <form action="#">
+            <!-- <form action="#">
             <div class="row">
                 <label>Enter Text</label>
                 <textarea></textarea>
@@ -41,10 +41,10 @@
                 <div class="outer">
                     <select></select>
                 </div>
-            </div> 
-                <!-- </form> -->
+            </div>
+            <!-- </form> -->
             <button>Convert To Speech</button>
-            
+
 
 
 

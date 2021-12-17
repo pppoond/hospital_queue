@@ -10,6 +10,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <meta charset="utf-8">
     <title>โรงพยาบาลเทศบาลนครอุดรธานี</title>
     <link rel="stylesheet" href="<?php echo base_url('assets/css/opd.css'); ?>">
+    <script type='text/javascript' src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
 </head>
 
 <body>
@@ -66,166 +67,259 @@ defined('BASEPATH') or exit('No direct script access allowed');
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.0/dist/sweetalert2.all.min.js"></script>
-    <script>
-        var data = {};
-        var currentQueueTime;
+    <div class="wrapper">
+        <header>INSERT TEXT</header>
+        <form>
+            <div class="row">
+                <?php
+                $url = 'http://localhost/ci/api_speech/speechapi';
+                $content = file_get_contents($url);
+                $json = json_decode($content, true);
+                foreach ($json as $item) {
+                ?>
+                    <textarea><?php echo "เชิญหมายเลข{$item['oqueue']}ที่ห้อง{$item['curdep_name']}"; ?></textarea>
+            </div>
+            <!-- <form action="#">
+            <div class="row">
+                <label>Enter Text</label>
+                <textarea></textarea>
+            </div> -->
+            <div class="row">
+                <label>Select Voice</label>
+                <div class="outer">
+                    <select id="voiceList"></select>
+                </div>
+            </div>
+            <!-- </form> -->
+            <button id="speechBtn">Convert To Speech</button>
+        </form>
+    </div>
+<?php } ?>
 
-        settingBtn = document.getElementById('setting-btn');
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.0/dist/sweetalert2.all.min.js"></script>
+<script>
+    var data = {};
+    var currentQueueTime;
+
+    settingBtn = document.getElementById('setting-btn');
 
 
-        //กด keyboard จะเข้าฟังชั่น
-        document.onkeydown = function(event) {
-            if (event.keyCode == "90") {
-                play();
+    //กด keyboard จะเข้าฟังชั่น
+    document.onkeydown = function(event) {
+        if (event.keyCode == "90") {
+            play();
+        }
+    }
+
+    window.onresize = function(event) {
+        var maxHeight = window.screen.height,
+            maxWidth = window.screen.width,
+            curHeight = window.innerHeight,
+            curWidth = window.innerWidth;
+
+        if (maxWidth == curWidth && maxHeight == curHeight) {
+            console.log('F11');
+
+            settingBtn.style.display = "none";
+        } else {
+            settingBtn.style.display = "flex";
+        }
+    }
+
+    function loadMainQueue() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("patient-queue-main").innerHTML =
+                    this.responseText;
             }
-        }
-
-        window.onresize = function(event) {
-            var maxHeight = window.screen.height,
-                maxWidth = window.screen.width,
-                curHeight = window.innerHeight,
-                curWidth = window.innerWidth;
-
-            if (maxWidth == curWidth && maxHeight == curHeight) {
-                console.log('F11');
-
-                settingBtn.style.display = "none";
-            } else {
-                settingBtn.style.display = "flex";
-            }
-        }
-
-        function loadMainQueue() {
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    document.getElementById("patient-queue-main").innerHTML =
-                        this.responseText;
-                }
-            };
-            xhttp.open("GET", "<?php echo site_url('Opd/dental_qmain') ?>", true);
-            xhttp.send();
-        }
-
-        loadMainQueue();
-
-
-
-        function timeRefresh() {
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    document.getElementById("timecurrent").innerHTML =
-                        this.responseText;
-                }
-            };
-            xhttp.open("GET", "<?php echo site_url('Dental/timecurrent') ?>", true);
-            xhttp.send();
         };
+        xhttp.open("GET", "<?php echo site_url('Opd/dental_qmain') ?>", true);
+        xhttp.send();
+    }
 
-        setInterval(function() {
-            timeRefresh();
-            // 1sec
-        }, 500);
+    loadMainQueue();
 
-        setInterval(function() {
-            checkDataByTime();
-        }, 2000);
 
-        async function checkDataByTime() {
-            var uri = '<?php echo site_url('Api/ovst/') ?>';
-            axios.get(uri).then(function(response) {
-                if (currentQueueTime != null) {
-                    if (response.data[0]['sign_datetime'] != currentQueueTime) {
-                        try {
-                            console.log('New Data');
-                            currentQueueTime = response.data[0]['sign_datetime'];
-                            loadMainQueue();
-                            play();
-                        } catch (error) {
-                            console.log(error);
-                        }
 
-                    } else {
-                        // nothing
-                        console.log('Nothing');
+    function timeRefresh() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("timecurrent").innerHTML =
+                    this.responseText;
+            }
+        };
+        xhttp.open("GET", "<?php echo site_url('Dental/timecurrent') ?>", true);
+        xhttp.send();
+    };
+
+    setInterval(function() {
+        timeRefresh();
+        // 1sec
+    }, 500);
+
+    setInterval(function() {
+        checkDataByTime();
+    }, 2000);
+
+    // check new data
+    async function checkDataByTime() {
+        var uri = '<?php echo site_url('Api/ovst/') ?>';
+        axios.get(uri).then(function(response) {
+            if (currentQueueTime != null) {
+                if (response.data[0]['sign_datetime'] != currentQueueTime) {
+                    try {
+                        console.log('New Data');
+                        currentQueueTime = response.data[0]['sign_datetime'];
+                        loadMainQueue();
+                        await play();
+                    } catch (error) {
+                        console.log(error);
                     }
                 } else {
-                    currentQueueTime = response.data[0]['sign_datetime'];
+                    // nothing
+                    console.log('Nothing');
                 }
-            }).catch((err) => console.log(err));
-        }
+            } else {
+                currentQueueTime = response.data[0]['sign_datetime'];
+            }
+        }).catch((err) => console.log(err));
+    }
 
-        function play() {
-            var audio = document.getElementById("audio");
-            audio.play();
-        }
-
-        async function showAlert2() {
-            Swal.fire({
-                title: 'asdasd',
-                input: 'select',
-                inputOptions: data,
-                inputPlaceholder: 'required',
-                showCancelButton: true,
-                inputValidator: function(value) {
-                    return new Promise(function(resolve, reject) {
-                        if (value !== '') {
-                            resolve();
-                        } else {
-                            reject('You need to select a Tier');
-                        }
-                    });
+    async function play() {
+        var audio = document.getElementById("audio");
+        // audio.play();
+        if (textarea.value !== "") {
+            if (!synth.speaking) {
+                textToSpeech(textarea.value);
+            }
+            if (textarea.value.length > 80) {
+                setInterval(() => {
+                    if (!synth.speaking && !isSpeaking) {
+                        isSpeaking = true;
+                        speechBtn.innerText = "Convert To Speech";
+                    } else {}
+                }, 500);
+                if (isSpeaking) {
+                    synth.resume();
+                    isSpeaking = false;
+                    speechBtn.innerText = "Pause Speech";
+                } else {
+                    synth.pause();
+                    isSpeaking = true;
+                    speechBtn.innerText = "Resume Speech";
                 }
-            }).then(function(result) {
-                swal({
-                    type: 'success',
-                    html: 'You selected: ' + result
-                });
-            });
-        }
-
-        var data;
-
-        var spcltySelect = document.getElementById('dep_select');
-
-        async function getSpclty() {
-            data = [];
-            var html;
-            var uri = '<?php echo site_url('Api/spclty') ?>';
-
-            //axios เป็น library สำหรับ ดึงข้อมูล api
-            axios.get(uri).then(function(response) {
-                html = ``;
-
-                //foreach ลูป ข้อมูลจาก json array มาเก็บใส่ html และ data (เก็บไว้ก่อน ยังไม่ได้ใช้อะไร)
-                response.data.forEach(element => {
-                    html += `<option value="${element.spclty}">${element.name} ${element.spname == null ? '' : '(' + element.spname + ')'}</option>`;
-                    data.push(element); //push ข้อมูลเข้า array
-                });
-                spcltySelect.innerHTML = html;
-            }).catch((err) => console.log(err));
-        }
-
-        function findBySpclty() {
-            var spcltySelectValue = document.getElementById('dep_select');
-            window.location.href = "Department/" + spcltySelectValue.value;
-            // console.log(spcltySelectValue.value);
-        }
-
-        // --------------------Modal-----------------------
-
-        // Get the modal
-        var modal = document.getElementById("myModal");
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
+            } else {
+                speechBtn.innerText = "Convert To Speech";
             }
         }
-    </script>
+    }
+
+    var data;
+
+    var spcltySelect = document.getElementById('dep_select');
+
+    async function getSpclty() {
+        data = [];
+        var html;
+        var uri = '<?php echo site_url('Api/spclty') ?>';
+
+        //axios เป็น library สำหรับ ดึงข้อมูล api
+        axios.get(uri).then(function(response) {
+            html = ``;
+
+            //foreach ลูป ข้อมูลจาก json array มาเก็บใส่ html และ data (เก็บไว้ก่อน ยังไม่ได้ใช้อะไร)
+            response.data.forEach(element => {
+                html += `<option value="${element.spclty}">${element.name} ${element.spname == null ? '' : '(' + element.spname + ')'}</option>`;
+                data.push(element); //push ข้อมูลเข้า array
+            });
+            spcltySelect.innerHTML = html;
+        }).catch((err) => console.log(err));
+    }
+
+    function findBySpclty() {
+        var spcltySelectValue = document.getElementById('dep_select');
+        window.location.href = "Department/" + spcltySelectValue.value;
+        // console.log(spcltySelectValue.value);
+    }
+
+    // --------------------Modal-----------------------
+
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+
+
+    const textarea = document.querySelector("textarea"),
+        voiceList = document.querySelector("#voiceList"),
+        speechBtn = document.querySelector("#speechBtn");
+    let synth = speechSynthesis,
+        isSpeaking = true;
+    voices();
+
+    function voices() {
+        for (let voice of synth.getVoices()) {
+            // let selected = voice.name === "Google US English" ? "selected" : "";
+            let selected = voice.name === "Microsoft Pattara - Thai (Thailand)" ? "selected" : "";
+            let option = `<option value="${voice.name}" ${selected}>${voice.name} (${voice.lang})</option>`;
+            voiceList.insertAdjacentHTML("beforeend", option);
+        }
+    }
+    synth.addEventListener("voiceschanged", voices);
+
+    function textToSpeech(text) {
+        let utterance = new SpeechSynthesisUtterance(text);
+        for (let voice of synth.getVoices()) {
+            if (voice.name === voiceList.value) {
+                utterance.voice = voice;
+            }
+        }
+        synth.speak(utterance);
+    }
+    speechBtn.addEventListener("click", e => {
+        e.preventDefault();
+        if (textarea.value !== "") {
+            if (!synth.speaking) {
+                textToSpeech(textarea.value);
+            }
+            if (textarea.value.length > 80) {
+                setInterval(() => {
+                    if (!synth.speaking && !isSpeaking) {
+                        isSpeaking = true;
+                        speechBtn.innerText = "Convert To Speech";
+                    } else {}
+                }, 500);
+                if (isSpeaking) {
+                    synth.resume();
+                    isSpeaking = false;
+                    speechBtn.innerText = "Pause Speech";
+                } else {
+                    synth.pause();
+                    isSpeaking = true;
+                    speechBtn.innerText = "Resume Speech";
+                }
+            } else {
+                speechBtn.innerText = "Convert To Speech";
+            }
+        }
+    });
+
+    function checkDataSpeech() {
+        var uri = '<?php echo site_url('Api_speech/speechapi') ?>';
+        axios.get(uri).then(function(response) {
+            var data = response.data;
+            textarea.innerText = `เชิญหมายเลข${data.oqueue} ที่ห้อง${data.curdep_name}`;
+        }).catch((err) => console.log(err));
+    }
+</script>
 </body>
 
 </html>
