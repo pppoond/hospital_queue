@@ -10,7 +10,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <meta charset="utf-8">
     <title>โรงพยาบาลเทศบาลนครอุดรธานี</title>
     <link rel="stylesheet" href="<?php echo base_url('assets/css/opd.css'); ?>">
-    <script type='text/javascript' src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
 </head>
 
 <body>
@@ -172,8 +171,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     try {
                         console.log('New Data');
                         currentQueueTime = response.data[0]['sign_datetime'];
+                        checkDataSpeech();
                         loadMainQueue();
-                        play();
                     } catch (error) {
                         console.log(error);
                     }
@@ -312,11 +311,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
         }
     });
 
-    function checkDataSpeech() {
+    async function checkDataSpeech() {
         var uri = '<?php echo site_url('Api_speech/speechapi') ?>';
         axios.get(uri).then(function(response) {
-            var data = response.data;
-            textarea.innerText = `เชิญหมายเลข${data.oqueue} ที่ห้อง${data.curdep_name}`;
+            try {
+                var data = response.data[0];
+                textarea.innerText = `เชิญหมายเลข${data.oqueue} ที่ห้อง ${data.curdep_name} `;
+                play();
+            } catch (error) {
+                console.log(error);
+            }
         }).catch((err) => console.log(err));
     }
 </script>
