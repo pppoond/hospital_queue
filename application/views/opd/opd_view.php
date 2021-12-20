@@ -13,9 +13,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 </head>
 
 <body>
+    
     <div class="container-main">
 
         <div class="container-home">
+            
             <?php $this->load->view('includes/header'); ?>
             <div class="body-home" style="height: 80vh;">
                 <div class="items1">

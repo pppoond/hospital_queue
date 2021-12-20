@@ -2,7 +2,7 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 header('Access-Control-Allow-Origin: *');
 
-class queueOnline extends CI_Controller
+class spclty extends CI_Controller
 {
 
     public function __construct()
@@ -16,7 +16,7 @@ class queueOnline extends CI_Controller
         $this->load->helper('url');
         $this->load->library('javascript');
         $this->load->view('includes/css');
-        $this->load->view('qonline/qonline_view');
+        $this->load->view('spclty/spclty_view');
         $this->load->view('includes/js');
     }
 

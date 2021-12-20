@@ -10,14 +10,26 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <meta charset="utf-8">
     <title>โรงพยาบาลเทศบาลนครอุดรธานี</title>
     <link rel="stylesheet" href="<?php echo base_url('assets/css/opd.css'); ?>">
-    <script type='text/javascript' src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
 </head>
 
 <body>
+
     <div class="container-main">
 
         <div class="container-home">
-            <?php $this->load->view('includes/header'); ?>
+
+            <div class="navbar-home" style="height: 15vh;">
+                <div class="navbar-items">
+                    <img src="<?php echo base_url('assets/images/logo.png'); ?>" width="75px">
+                    <div style="width: 16px;"></div>
+                    <h1 style="font-weight: 600;">โรงพยาบาลเทศบาลนครอุดรธานี</h1>
+                </div>
+                <div style="text-align: center;">
+                    <h1 style="font-weight: 600;">Spclty</h1>
+                    <div style="font-size: large;font-weight: 700;border: 3px solid white;border-radius: 12px;padding: 5px;background-color: Salmon;" id="timecurrent">
+                    </div>
+                </div>
+            </div>
             <div class="body-home" style="height: 80vh;">
                 <div class="items1">
                     <div class="in-items-main" id="link_page_main">
@@ -67,6 +79,34 @@ defined('BASEPATH') or exit('No direct script access allowed');
         </div>
     </div>
 
+    <div class="wrapper">
+        <header>INSERT TEXT</header>
+        <form>
+            <div class="row">
+                <?php
+                $url = 'http://localhost/ci/api_speech/speechapi';
+                $content = file_get_contents($url);
+                $json = json_decode($content, true);
+                foreach ($json as $item) {
+                ?>
+                    <textarea><?php echo "เชิญหมายเลข{$item['oqueue']}ที่ห้อง{$item['curdep_name']} "; ?></textarea>
+            </div>
+            <!-- <form action="#">
+            <div class="row">
+                <label>Enter Text</label>
+                <textarea></textarea>
+            </div> -->
+            <div class="row">
+                <label>Select Voice</label>
+                <div class="outer">
+                    <select id="voiceList"></select>
+                </div>
+            </div>
+            <!-- </form> -->
+            <button id="speechBtn">Convert To Speech</button>
+        </form>
+    </div>
+<?php } ?>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.0/dist/sweetalert2.all.min.js"></script>
 <script>
@@ -144,8 +184,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     try {
                         console.log('New Data');
                         currentQueueTime = response.data[0]['sign_datetime'];
+                        checkDataSpeech();
                         loadMainQueue();
-                        play();
                     } catch (error) {
                         console.log(error);
                     }
@@ -159,7 +199,34 @@ defined('BASEPATH') or exit('No direct script access allowed');
         }).catch((err) => console.log(err));
     }
 
-   
+    async function play() {
+        var audio = document.getElementById("audio");
+        // audio.play();
+        if (textarea.value !== "") {
+            if (!synth.speaking) {
+                textToSpeech(textarea.value);
+            }
+            if (textarea.value.length > 80) {
+                setInterval(() => {
+                    if (!synth.speaking && !isSpeaking) {
+                        isSpeaking = true;
+                        speechBtn.innerText = "Convert To Speech";
+                    } else {}
+                }, 500);
+                if (isSpeaking) {
+                    synth.resume();
+                    isSpeaking = false;
+                    speechBtn.innerText = "Pause Speech";
+                } else {
+                    synth.pause();
+                    isSpeaking = true;
+                    speechBtn.innerText = "Resume Speech";
+                }
+            } else {
+                speechBtn.innerText = "Convert To Speech";
+            }
+        }
+    }
 
     var data;
 
@@ -203,7 +270,72 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 
 
-    
+    const textarea = document.querySelector("textarea"),
+        voiceList = document.querySelector("#voiceList"),
+        speechBtn = document.querySelector("#speechBtn");
+    let synth = speechSynthesis,
+        isSpeaking = true;
+    voices();
+
+    function voices() {
+        for (let voice of synth.getVoices()) {
+            // let selected = voice.name === "Google US English" ? "selected" : "";
+            let selected = voice.name === "Microsoft Pattara - Thai (Thailand)" ? "selected" : "";
+            let option = `<option value="${voice.name}" ${selected}>${voice.name} (${voice.lang})</option>`;
+            voiceList.insertAdjacentHTML("beforeend", option);
+        }
+    }
+    synth.addEventListener("voiceschanged", voices);
+
+    function textToSpeech(text) {
+        let utterance = new SpeechSynthesisUtterance(text);
+        for (let voice of synth.getVoices()) {
+            if (voice.name === voiceList.value) {
+                utterance.voice = voice;
+            }
+        }
+        synth.speak(utterance);
+    }
+    speechBtn.addEventListener("click", e => {
+        e.preventDefault();
+        if (textarea.value !== "") {
+            if (!synth.speaking) {
+                textToSpeech(textarea.value);
+            }
+            if (textarea.value.length > 80) {
+                setInterval(() => {
+                    if (!synth.speaking && !isSpeaking) {
+                        isSpeaking = true;
+                        speechBtn.innerText = "Convert To Speech";
+                    } else {}
+                }, 500);
+                if (isSpeaking) {
+                    synth.resume();
+                    isSpeaking = false;
+                    speechBtn.innerText = "Pause Speech";
+                } else {
+                    synth.pause();
+                    isSpeaking = true;
+                    speechBtn.innerText = "Resume Speech";
+                }
+            } else {
+                speechBtn.innerText = "Convert To Speech";
+            }
+        }
+    });
+
+    async function checkDataSpeech() {
+        var uri = '<?php echo site_url('Api_speech/speechapi') ?>';
+        axios.get(uri).then(function(response) {
+            try {
+                var data = response.data[0];
+                textarea.innerText = `เชิญหมายเลข${data.oqueue} ที่ห้อง ${data.curdep_name} `;
+                play();
+            } catch (error) {
+                console.log(error);
+            }
+        }).catch((err) => console.log(err));
+    }
 </script>
 </body>
 
