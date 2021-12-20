@@ -24,13 +24,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     <div class="in-items-main" id="link_page_main">
                         <div class="item-card">
                             <div class="card1">
-                                <h1 style="padding: 0;margin: 0;font-weight: 600;">หมายเลข</h1>
+                                <h1 style="padding: 0;margin: 0;font-weight: 600;font-size: 60px;">หมายเลข</h1>
                             </div>
                             <div class="card2">
-                                <h1 style="padding: 0;margin: 0;font-weight: 600;">ห้อง</h1>
+                                <h1 style="padding: 0;margin: 0;font-weight: 600;font-size: 60px;">ห้อง</h1>
                             </div>
                             <div class="card3">
-                                <h1 style="padding: 0;margin: 0;font-weight: 600;">เวลาที่เรียกคิว</h1>
+                                <h1 style="padding: 0;margin: 0;font-weight: 600;font-size: 60px;">เวลา</h1>
                             </div>
                             <audio id="audio" src="<?php echo base_url('assets/sound/bell.wav'); ?>"></audio>
                         </div>
