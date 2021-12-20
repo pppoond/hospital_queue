@@ -9,7 +9,7 @@ class Home extends CI_Controller
 	{
 		$this->load->view('includes/css');
 
-		$this->load->view('speech_view');
+		$this->load->view('opd/opd_view');
 	}
 
 	public function qnumber()

@@ -82,13 +82,17 @@
                                             <button class="btn btn-outline-secondary m-1 d-block d-md-inline ml-auto" onclick="selectReport('report-twelvemonths.php', this, 'bar')">กายภาพ</button>
                                             <button class="btn btn-outline-secondary m-1 d-block d-md-inline ml-auto" onclick="selectReport('report-year.php', this, 'bar')">ห้องไต</button>
                                         </p>
+
+
                                     </div>
+
+
                                     <div class="position-relative">
-                                        <!-- <canvas id="visitors-chart" height="350"></canvas> -->
+                                        <canvas id="visitors-chart" height="0"></canvas>
 
 
 
-                                        <!-- <div class="container-main">
+                                        <div class="container-main">
 
                                             <div class="container-home">
                                                 <div class="body-home" style="height: 80vh;">
@@ -107,7 +111,7 @@
                                                             </div>
 
                                                             <!-- คิวหลัก -->
-                                        <!-- <div id="patient-queue-main">
+                                                            <div id="patient-queue-main">
 
                                                             </div>
                                                         </div>
@@ -115,7 +119,7 @@
                                                 </div>
 
                                             </div>
-                                        </div> -->
+                                        </div>
 
 
 
