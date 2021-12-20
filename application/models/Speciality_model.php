@@ -1,24 +1,25 @@
 <?php
 class Speciality_model extends CI_Model
 {
-    public function getData()
-    {
-        $sql = "
+	public function getData()
+	{
+		$sql = "
         SELECT * FROM spclty ORDER BY spclty ASC;
         ";
-        $query = $this->db->query($sql);
-        return $query;
-    }
-    public function findById($id)
-    {
-    }
-
-
-
-
-    public function speechBox()
-    {
-        $sql = "
+		$query = $this->db->query($sql);
+		return $query;
+	}
+	public function findById($spclty)
+	{
+		$sql = "
+        SELECT * FROM spclty WHERE spclty = " . $spclty . " ORDER BY spclty ASC;
+        ";
+		$query = $this->db->query($sql);
+		return $query;
+	}
+	public function speechBox()
+	{
+		$sql = "
         SELECT
 	o.*,
 	o.vstdate,
@@ -45,7 +46,7 @@ ORDER BY
 	sign_datetime DESC 
 	LIMIT 1
         ";
-        $query = $this->db->query($sql);
-        return $query;
-    }
+		$query = $this->db->query($sql);
+		return $query;
+	}
 }

@@ -9,6 +9,7 @@ class Department extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Department_model');
+        $this->load->model('Speciality_model');
     }
 
     //แสดงหน้าตาม department id
@@ -18,7 +19,7 @@ class Department extends CI_Controller
 
         if ($depcode != 'index') {
             //query ถ้ามีข้อมูล จะเข้าเงื่อนไช if ถ้าไม่มี จะเข้า else
-
+           
             if ($depcode == '10') {
                 echo $depcode;
             } else {

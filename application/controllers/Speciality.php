@@ -12,20 +12,17 @@ class Speciality extends CI_Controller
     }
 
     //แสดงหน้าตาม department id
-    public function _remap($depcode)
+    public function _remap($spclty = "")
     {
         //depcode default เป็น index
+        $query =  $this->Speciality_model->findById($spclty);
+        if ($query->num_rows() >= 1) {
 
-        if ($depcode != 'index') {
-            //query ถ้ามีข้อมูล จะเข้าเงื่อนไช if ถ้าไม่มี จะเข้า else
-
-            if ($depcode == '10') {
-                echo $depcode;
-            } else {
-                $this->notfound();
-            }
+            $row = $query->first_row();
+            $data = $row;
+            $this->page($data);
         } else {
-            $this->hello();
+            $this->notfound();
         }
     }
 
@@ -34,9 +31,13 @@ class Speciality extends CI_Controller
         echo "Index";
     }
 
-    public function hello()
+    public function page($data)
     {
-        echo "Heoloasd";
+        $this->load->helper('url');
+        $this->load->library('javascript');
+        $this->load->view('includes/css');
+        $this->load->view('spclty/spclty_view', $data);
+        $this->load->view('includes/js');
     }
 
     public function notfound()
