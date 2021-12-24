@@ -13,7 +13,7 @@ class Kskdepartment_model extends CI_Model
     public function findById($depcode)
     {
         $sql = "
-        SELECT * FROM {$this->tableName} WHERE spclty = " . $depcode . " ORDER BY depcode ASC;
+        SELECT * FROM {$this->tableName} WHERE depcode = " . $depcode . " ORDER BY depcode ASC;
         ";
         $query = $this->db->query($sql);
         return $query;

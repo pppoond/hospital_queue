@@ -8,7 +8,6 @@ class Spclty extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('Opd_model');
     }
 
     public function index()
@@ -61,6 +60,47 @@ class Spclty extends CI_Controller
             echo "<div style='text-align: center;width: 100%; color:red ; margin:75px; font-weight: 900;' ><h1>ไม่มีคิว</h1></div>";
         }
     }
+
+    public function qmain($jsonString = "")
+    {
+        if ($jsonString != "") {
+        } else {
+            $json = file_get_contents("http://127.0.0.1/ci2/api/request_queue");
+            $obj = json_decode($json);
+            $num_row = 1;
+            foreach ($obj as $dataRow) {
+                // echo $dataRow->spclty;
+                $data = array(
+                    'oqueue' => $dataRow->oqueue,
+                    'curdep_name' => $dataRow->curdep_name,
+                    'ptname' => $dataRow->ptname,
+                    'num_row' => $num_row,
+                    'sign_datetime' => $dataRow->sign_datetime
+                );
+                $this->load->view('spclty/patient_queue', $data);
+                $num_row++;
+            }
+        }
+        // $query =  $this->Opd_model->getDataByQueue();
+        // if ($query->num_rows() >= 1) {
+        //     $num_row = 1;
+        //     foreach ($query->result() as $row) {
+        //         $data = array(
+        //             'oqueue' => $row->oqueue,
+        //             'vstdate' => $row->vstdate,
+        //             'curdep_name' => $row->curdep_name,
+        //             'ptname' => $row->ptname,
+        //             'num_row' => $num_row,
+        //             'sign_datetime' => $row->sign_datetime
+        //         );
+        //         $this->load->view('pages/dental/dental_qmain', $data);
+        //         $num_row++;
+        //     }
+        // } else {
+        //     echo "<div style='text-align: center;width: 100%; color:red ; margin:75px; font-weight: 900;' ><h1>ไม่มีคิว</h1></div>";
+        // }
+    }
+
 
     public function timecurrent()
     {

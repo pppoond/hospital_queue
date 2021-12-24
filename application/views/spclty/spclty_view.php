@@ -25,7 +25,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     <h1 style="font-weight: 600;">โรงพยาบาลเทศบาลนครอุดรธานี</h1>
                 </div>
                 <div style="text-align: center;">
-                    <h1 style="font-weight: 600;"><?php echo $name . " (" . $spname . ")"; ?></h1>
+                    <h1 style="font-weight: 600;"><?php if ($spname != null)  echo $name . " (" . $spname . ")";
+                                                    else echo $name; ?></h1>
                     <div style="font-size: large;font-weight: 700;border: 3px solid white;border-radius: 12px;padding: 5px;background-color: Salmon;" id="timecurrent">
                     </div>
                 </div>
@@ -73,7 +74,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 </select>
             </div>
             <div class="modal-footer">
-                <a onclick="play()" class="btn btn-primary">ยืนยันรายการ</a>
+                <a onclick="findBySpclty()" class="btn btn-primary">ยืนยันรายการ</a>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">ปิดหน้าต่าง</button>
             </div>
         </div>
@@ -140,12 +141,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         this.responseText;
                 }
             };
-            xhttp.open("GET", "<?php echo site_url('Opd/dental_qmain') ?>", true);
+            xhttp.open("GET", "<?php echo site_url('spclty/qmain') ?>", true);
             xhttp.send();
             return;
         }
-
-
 
         function timeRefresh() {
             var xhttp = new XMLHttpRequest();
@@ -179,7 +178,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             currentQueueTime = response.data[0]['sign_datetime'];
                             loadMainQueue();
                             checkDataSpeech();
-
                             // play(); //play sound function
                         } catch (error) {
                             console.log(error);
@@ -248,7 +246,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
         function findBySpclty() {
             var spcltySelectValue = document.getElementById('dep_select');
-            window.location.href = "Department/" + spcltySelectValue.value;
+            window.location.href = "<?php echo base_url('speciality/') ?>" + spcltySelectValue.value;
             // console.log(spcltySelectValue.value);
         }
 
