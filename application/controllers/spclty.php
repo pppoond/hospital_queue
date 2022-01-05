@@ -61,11 +61,26 @@ class Spclty extends CI_Controller
         }
     }
 
-    public function qmain($jsonString = "")
+    public function qmain($spclty = "")
     {
-        if ($jsonString != "") {
+        if ($spclty != "") {
+            $json = file_get_contents("http://192.168.100.239/hos_q/client/api/request_queue_by_spclty/" . $spclty);
+            $obj = json_decode($json);
+            $num_row = 1;
+            foreach ($obj as $dataRow) {
+                // echo $dataRow->spclty;
+                $data = array(
+                    'oqueue' => $dataRow->oqueue,
+                    'curdep_name' => $dataRow->curdep_name,
+                    'ptname' => $dataRow->ptname,
+                    'num_row' => $num_row,
+                    'sign_datetime' => $dataRow->sign_datetime
+                );
+                $this->load->view('spclty/patient_queue', $data);
+                $num_row++;
+            }
         } else {
-            $json = file_get_contents("http://127.0.0.1/ci2/api/request_queue");
+            $json = file_get_contents("http://192.168.100.239/hos_q/client/api/request_queue");
             $obj = json_decode($json);
             $num_row = 1;
             foreach ($obj as $dataRow) {

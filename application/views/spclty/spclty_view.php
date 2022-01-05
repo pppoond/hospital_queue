@@ -107,6 +107,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <script>
         var data = {};
         var currentQueueTime;
+        var queueList = [];
 
         settingBtn = document.getElementById('setting-btn');
 
@@ -141,7 +142,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         this.responseText;
                 }
             };
-            xhttp.open("GET", "<?php echo site_url('spclty/qmain') ?>", true);
+            xhttp.open("GET", "<?php echo site_url('spclty/qmain/') . $spclty; ?>", true);
             xhttp.send();
             return;
         }
@@ -163,17 +164,47 @@ defined('BASEPATH') or exit('No direct script access allowed');
             // 1sec
         }, 500);
 
-        setInterval(function() {
-            checkDataByTime();
-        }, 2000);
+        var myInterval = null;
+
+        function myStart() {
+
+            myInterval = setInterval(function() {
+                checkDataByTime();
+            }, 1000);
+        }
+
+        function myStop() {
+            clearInterval(myInterval);
+        }
+
+        myStart();
 
         // check new data
         async function checkDataByTime() {
-            var uri = '<?php echo site_url('Api/ovst/') ?>';
+            // var uri = '<?php echo site_url('Api/ovst/') ?>';
+            var uri = 'http://192.168.100.239/hos_q/client/api/request_queue_by_spclty/<?php echo $spclty; ?>';
             axios.get(uri).then(function(response) {
+                if (queueList.length <= 0) {
+                    response.data.forEach(function(element, index) {
+                        queueList.push(element);
+                    });
+                    console.log("NEW DATA");
+                    console.log(queueList[0].sign_datetime);
+                } else {
+                    queueList = [];
+                    console.log("CLEAR");
+                }
+                // console.log(JSON.stringify(response.data[0]));
+                // console.log(response.data[0].sign_datetime);
+                // console.log(response.data[1].sign_datetime);
+                // console.log(response.data[2].sign_datetime);
+                // console.log(response.data[3].sign_datetime);
+                // console.log(response.data[4].sign_datetime);
+
                 if (currentQueueTime != null) {
                     if (response.data[0]['sign_datetime'] != currentQueueTime) {
                         try {
+                            myStop();
                             console.log('New Data');
                             currentQueueTime = response.data[0]['sign_datetime'];
                             loadMainQueue();
@@ -189,11 +220,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 } else {
                     currentQueueTime = response.data[0]['sign_datetime'];
                 }
+                console.log(queueList.length);
             }).catch((err) => console.log(err));
             return;
         }
-
-        function play() {
+        async function play() {
             var audio = document.getElementById("audio");
             // audio.play();
             if (textarea.value !== "") {
@@ -220,6 +251,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     speechBtn.innerText = "Convert To Speech";
                 }
             }
+
         }
 
         var data;
@@ -289,6 +321,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 }
             }
             synth.speak(utterance);
+            myStart();
         }
         speechBtn.addEventListener("click", e => {
             e.preventDefault();
@@ -319,7 +352,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
         });
 
         checkDataSpeech = async =>{
-            var uri = '<?php echo site_url('Api_speech/speechapi') ?>';
+            // var uri = '<?php echo site_url('Api_speech/speechapi') ?>';
+            var uri = 'http://192.168.100.239/hos_q/client/api/request_queue_by_spclty/<?php echo $spclty; ?>';
             axios.get(uri).then(function(response) {
                 try {
                     var data = response.data[0];
@@ -333,7 +367,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
         }
 
         firstCheckDataSpeech = async =>{
-            var uri = '<?php echo site_url('Api_speech/speechapi') ?>';
+            // var uri = '<?php echo site_url('Api_speech/speechapi') ?>';
+            var uri = 'http://192.168.100.239/hos_q/client/api/request_queue_by_spclty/<?php echo $spclty; ?>';
             axios.get(uri).then(function(response) {
                 try {
                     var data = response.data[0];

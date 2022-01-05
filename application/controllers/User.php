@@ -5,11 +5,11 @@ header('Access-Control-Allow-Origin: *');
 class User extends CI_Controller
 {
 
-    public function __construct()
-    {
-        parent::__construct();
-        $this->load->model('User_model');
-    }
+    // public function __construct()
+    // {
+    //     parent::__construct();
+    //     $this->load->model('User_model');
+    // }
 
     public function index()
     {
