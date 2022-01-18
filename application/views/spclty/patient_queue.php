@@ -3,7 +3,7 @@ if ($num_row == 1) {
 ?>
     <div class="item-card2">
         <div class="card1 g-color" style="color: white;">
-            <h1 style="padding: 0;margin: 0;font-weight: 600;font-size: 120px;"><?php echo $oqueue; ?></h1>
+            <div style="padding: 0;margin: 0;font-weight: 600;font-size: 200px;"><?php echo $oqueue; ?></div>
             <h4 style="padding: 0;margin: 0;font-weight: 600;font-size: 40px;"><?php echo $ptname; ?></h4>
         </div>
         <div class="card2 g-color" style="background-color: #616EFF;color: white;">
@@ -20,7 +20,7 @@ if ($num_row == 1) {
 ?>
     <div class="item-card2">
         <div class="card1">
-            <h1 style="padding: 0;margin: 0;font-weight: 600;font-size: 120px;"><?php echo $oqueue; ?></h1>
+            <div style="padding: 0;margin: 0;font-weight: 600;font-size: 200px;"><?php echo $oqueue; ?></div>
             <h4 style="padding: 0;margin: 0;font-weight: 600;font-size: 40px;"><?php echo $ptname; ?></h4>
         </div>
         <div class="card2">

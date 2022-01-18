@@ -167,7 +167,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
         var myInterval = null;
 
         function myStart() {
-
             myInterval = setInterval(function() {
                 checkDataByTime();
             }, 1000);
@@ -181,19 +180,20 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
         // check new data
         async function checkDataByTime() {
+            myStop(); //stop time
             // var uri = '<?php echo site_url('Api/ovst/') ?>';
-            var uri = 'http://192.168.100.239/hos_q/client/api/request_queue_by_spclty/<?php echo $spclty; ?>';
+            var uri = 'https://hospital.udoncity.go.th/hos_q/client/api/request_queue_by_spclty/<?php echo $spclty; ?>';
             axios.get(uri).then(function(response) {
-                if (queueList.length <= 0) {
-                    response.data.forEach(function(element, index) {
-                        queueList.push(element);
-                    });
-                    console.log("NEW DATA");
-                    console.log(queueList[0].sign_datetime);
-                } else {
-                    queueList = [];
-                    console.log("CLEAR");
-                }
+                // if (queueList.length <= 0) {
+                //     response.data.forEach(function(element, index) {
+                //         queueList.push(element);
+                //     });
+                //     console.log("NEW DATA");
+                //     console.log(queueList[0].sign_datetime);
+                // } else {
+                //     queueList = [];
+                //     console.log("CLEAR");
+                // }
                 // console.log(JSON.stringify(response.data[0]));
                 // console.log(response.data[0].sign_datetime);
                 // console.log(response.data[1].sign_datetime);
@@ -204,7 +204,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 if (currentQueueTime != null) {
                     if (response.data[0]['sign_datetime'] != currentQueueTime) {
                         try {
-                            myStop();
+                            // myStop();
                             console.log('New Data');
                             currentQueueTime = response.data[0]['sign_datetime'];
                             loadMainQueue();
@@ -214,11 +214,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             console.log(error);
                         }
                     } else {
+                        myStart(); //start time
                         // nothing
                         console.log('Nothing');
                     }
                 } else {
                     currentQueueTime = response.data[0]['sign_datetime'];
+                    myStart();
                 }
                 console.log(queueList.length);
             }).catch((err) => console.log(err));
@@ -353,7 +355,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
         checkDataSpeech = async =>{
             // var uri = '<?php echo site_url('Api_speech/speechapi') ?>';
-            var uri = 'http://192.168.100.239/hos_q/client/api/request_queue_by_spclty/<?php echo $spclty; ?>';
+            var uri = 'https://hospital.udoncity.go.th/hos_q/client/api/request_queue_by_spclty/<?php echo $spclty; ?>';
             axios.get(uri).then(function(response) {
                 try {
                     var data = response.data[0];
@@ -368,7 +370,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
         firstCheckDataSpeech = async =>{
             // var uri = '<?php echo site_url('Api_speech/speechapi') ?>';
-            var uri = 'http://192.168.100.239/hos_q/client/api/request_queue_by_spclty/<?php echo $spclty; ?>';
+            var uri = 'https://hospital.udoncity.go.th/hos_q/client/api/request_queue_by_spclty/<?php echo $spclty; ?>';
             axios.get(uri).then(function(response) {
                 try {
                     var data = response.data[0];

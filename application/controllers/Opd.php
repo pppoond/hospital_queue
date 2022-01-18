@@ -26,7 +26,6 @@ class Opd extends CI_Controller
         if ($query->num_rows() >= 1) {
             $num_row = 1;
             foreach ($query->result() as $row) {
-
                 $data = array(
                     'oqueue' => $row->oqueue,
                     'vstdate' => $row->vstdate,
