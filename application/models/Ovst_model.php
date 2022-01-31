@@ -43,7 +43,7 @@ class Ovst_model extends CI_Model
         o.hn,
         o.vsttime,
         o.vn,
-        concat( p.pname, p.fname, ' ', p.lname ) AS ptname,
+        concat(p.fname, ' ', p.lname ) AS ptname,
         v.age_y,
         v.age_m,
         v.age_d,

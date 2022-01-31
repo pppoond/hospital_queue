@@ -13,11 +13,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 </head>
 
 <body>
-
     <div class="container-main">
-
         <div class="container-home">
-
             <div class="navbar-home" style="height: 15vh;">
                 <div class="navbar-items">
                     <img src="<?php echo base_url('assets/images/logo.png'); ?>" width="75px">
@@ -119,6 +116,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             }
         }
 
+        //fullscreen
         window.onresize = function(event) {
             var maxHeight = window.screen.height,
                 maxWidth = window.screen.width,
@@ -184,22 +182,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
             // var uri = '<?php echo site_url('Api/ovst/') ?>';
             var uri = 'https://hospital.udoncity.go.th/hos_q/client/api/request_queue_by_spclty/<?php echo $spclty; ?>';
             axios.get(uri).then(function(response) {
-                // if (queueList.length <= 0) {
-                //     response.data.forEach(function(element, index) {
-                //         queueList.push(element);
-                //     });
-                //     console.log("NEW DATA");
-                //     console.log(queueList[0].sign_datetime);
-                // } else {
-                //     queueList = [];
-                //     console.log("CLEAR");
-                // }
-                // console.log(JSON.stringify(response.data[0]));
-                // console.log(response.data[0].sign_datetime);
-                // console.log(response.data[1].sign_datetime);
-                // console.log(response.data[2].sign_datetime);
-                // console.log(response.data[3].sign_datetime);
-                // console.log(response.data[4].sign_datetime);
 
                 if (currentQueueTime != null) {
                     if (response.data[0]['sign_datetime'] != currentQueueTime) {
@@ -359,7 +341,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             axios.get(uri).then(function(response) {
                 try {
                     var data = response.data[0];
-                    textarea.innerText = `เชิญหมายเลข${data.oqueue} ที่ห้อง ${data.curdep_name} `;
+                    textarea.innerText = `เชิญหมายเลข${data.oqueue} คุณ${data.ptname} ที่ห้อง ${data.curdep_name} `;
                     play(); //play sound
                 } catch (error) {
                     console.log(error);
@@ -374,7 +356,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             axios.get(uri).then(function(response) {
                 try {
                     var data = response.data[0];
-                    textarea.innerText = `เชิญหมายเลข${data.oqueue} ที่ห้อง ${data.curdep_name} `;
+                    textarea.innerText = `เชิญหมายเลข${data.oqueue} คุณ${data.ptname} ที่ห้อง ${data.curdep_name} `;
                 } catch (error) {
                     console.log(error);
                 }

@@ -24,8 +24,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |
 */
 // $config['base_url'] = (is_https() ? 'https://' : 'http://') . $_SERVER['SERVER_NAME'] . "/ci";
-// $config['base_url'] = "https://hospital.udoncity.go.th/hos_q/server";
 $config['base_url'] = "";
+// $config['base_url'] = "https://hospital.udoncity.go.th/hos_q/server";
 
 /*
 |--------------------------------------------------------------------------
