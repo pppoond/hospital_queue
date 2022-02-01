@@ -147,7 +147,7 @@ body {
     font-weight: 700;
     width: 30%;
     color: #FF8484;
-    line-height: .8em;
+    /* line-height: .8em; */
     padding-bottom: 16px;
     flex-direction: column;
     display: flex;
@@ -158,6 +158,11 @@ body {
     /* overflow: hidden; */
     border-radius: 16px;
     margin-right: 8px;
+}
+
+.body-home .items1 .in-items-main .item-card2 .card1 .i {
+    font-size: 25vh;
+    line-height: .8em;
 }
 
 .body-home .items1 .in-items-main .item-card2 .card2 {

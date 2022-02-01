@@ -161,4 +161,24 @@ class Api extends CI_Controller
         http_response_code(200);
         exit();
     }
+
+    public function statusUpdate()
+    {
+        $oqueue = $_GET["oqueue"] ;
+        $db2 = $this->load->database('db2', TRUE);
+        $sql = "UPDATE request_queue set status = 1 where Date(time_reg)=curdate() and oqueue = '" . $oqueue . "'";
+        $query = $db2->query($sql);
+    }
+
+
+    public function queueByStatus()
+    {
+        $db2 = $this->load->database('db2', TRUE);
+        $sql = "SELECT * from request_queue where status=1 and Date(time_reg)=curdate()";
+        $query = $db2->query($sql);
+        echo json_encode($query->result(), JSON_UNESCAPED_UNICODE); //แสดงข้อมูลเป็น json
+        http_response_code(200);
+        exit();
+    }
+
 }

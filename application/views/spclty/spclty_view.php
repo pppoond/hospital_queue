@@ -131,6 +131,17 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 settingBtn.style.display = "flex";
             }
         }
+        var onShowPtname = true;
+
+        function onShowPtnameClick() {
+            if (onShowPtname == true) {
+                onShowPtname = false;
+            } else {
+                onShowPtname = true;
+            }
+            console.log(onShowPtname);
+            loadMainQueue();
+        }
 
         async function loadMainQueue() {
             var xhttp = new XMLHttpRequest();
@@ -140,7 +151,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         this.responseText;
                 }
             };
-            xhttp.open("GET", "<?php echo site_url('spclty/qmain/') . $spclty; ?>", true);
+            //Show ptname Center screen
+            if (onShowPtname == true) {
+                xhttp.open("GET", "<?php echo site_url('spclty/qmain2/') . $spclty; ?>", true);
+            } else {
+                xhttp.open("GET", "<?php echo site_url('spclty/qmain/') . $spclty; ?>", true);
+            }
             xhttp.send();
             return;
         }
