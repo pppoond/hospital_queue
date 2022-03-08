@@ -4,6 +4,21 @@
     font-family: 'Sarabun', sans-serif;
 } */
 
+* {
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Old versions of Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently */
+}
+
 .icon-hover {
     color: white;
     transition: 0.1s;
@@ -17,7 +32,13 @@
 }
 
 .g-color {
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background: linear-gradient(-45deg, #529bee, #3c86e7, #4d9191, #3f7777);
+    background-size: 400% 400%;
+    animation: gradient 10s ease infinite;
+}
+
+.g-color2 {
+    background: linear-gradient(-45deg, #d35419, #3c86e7, #4d9191, #1c11b6);
     background-size: 400% 400%;
     animation: gradient 10s ease infinite;
 }

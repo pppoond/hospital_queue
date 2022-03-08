@@ -24,8 +24,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <div style="text-align: center;">
                     <h1 style="font-weight: 600;"><?php if ($spname != null)  echo $name . " (" . $spname . ")";
                                                     else echo $name; ?></h1>
-                    <div style="font-size: large;font-weight: 700;border: 3px solid white;border-radius: 12px;padding: 5px;background-color: Salmon;" id="timecurrent">
-                    </div>
+                    <!-- <div style="font-size: large;font-weight: 700;border: 3px solid white;border-radius: 12px;padding: 5px;background-color: Salmon;" id="timecurrent">
+                    </div> -->
                 </div>
             </div>
             <div class="body-home" style="height: 80vh;">
@@ -113,11 +113,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
         document.onkeydown = function(event) {
             if (event.keyCode == "90") {
                 play();
+            } else if (event.keyCode == "27") {
+                // closeFullscreen();
+                // alert("sdasdasd");
             }
         }
 
-        //fullscreen
-        window.onresize = function(event) {
+        /* Get the element you want displayed in fullscreen */
+        var elem = document.documentElement;
+
+        recheckScreen();
+
+        function recheckScreen() {
             var maxHeight = window.screen.height,
                 maxWidth = window.screen.width,
                 curHeight = window.innerHeight,
@@ -131,7 +138,42 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 settingBtn.style.display = "flex";
             }
         }
-        var onShowPtname = true;
+        //fullscreen to hide setting btns
+        window.onresize = function(event) {
+            recheckScreen();
+        }
+
+        /* Function to open fullscreen mode */
+        function openFullscreen() {
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.mozRequestFullScreen) {
+                /* Firefox */
+                elem.mozRequestFullScreen();
+            } else if (elem.webkitRequestFullscreen) {
+                /* Chrome, Safari & Opera */
+                elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) {
+                /* IE/Edge */
+                elem = window.top.document.body; //To break out of frame in IE
+                elem.msRequestFullscreen();
+            }
+        }
+
+        /* Function to close fullscreen mode */
+        function closeFullscreen() {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.mozCancelFullScreen) {
+                document.mozCancelFullScreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) {
+                window.top.document.msExitFullscreen();
+            }
+        }
+
+        var onShowPtname = false;
 
         function onShowPtnameClick() {
             if (onShowPtname == true) {
@@ -174,9 +216,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
         };
 
         setInterval(function() {
-            timeRefresh();
+            // timeRefresh();
             // 1sec
-        }, 500);
+            window.location.href = window.location.href;
+        }, 1000000);
 
         var myInterval = null;
 
@@ -198,7 +241,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
             // var uri = '<?php echo site_url('Api/ovst/') ?>';
             var uri = 'https://hospital.udoncity.go.th/hos_q/client/api/request_queue_by_spclty/<?php echo $spclty; ?>';
             axios.get(uri).then(function(response) {
-
                 if (currentQueueTime != null) {
                     if (response.data[0]['sign_datetime'] != currentQueueTime) {
                         try {
@@ -321,8 +363,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 }
             }
             synth.speak(utterance);
+            // runTimeout();
             myStart();
         }
+
+        // function runTimeout() {
+        //     setTimeout(myStart(), 5000);
+        // }
+
         speechBtn.addEventListener("click", e => {
             e.preventDefault();
             if (textarea.value !== "") {

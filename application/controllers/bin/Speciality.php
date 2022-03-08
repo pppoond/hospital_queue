@@ -17,7 +17,6 @@ class Speciality extends CI_Controller
         //depcode default เป็น index
         $query =  $this->Speciality_model->findById($spclty);
         if ($query->num_rows() >= 1) {
-
             $row = $query->first_row();
             $data = $row;
             $this->page($data);
