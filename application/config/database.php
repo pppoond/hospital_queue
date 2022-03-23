@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => '192.168.100.250',
-	'username' => 'ud12418',
-	'password' => '192168100250',
-	'database' => 'db_ud12418',
+	'hostname' => '192.168.xxx.xxx',
+	'username' => 'xxxx',
+	'password' => 'xxxx',
+	'database' => 'xxxx',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
@@ -97,10 +97,10 @@ $db['default'] = array(
 
 $db['db2'] = array(
 	'dsn'	=> '',
-	'hostname' => '192.168.100.250',
-	'username' => 'ud12418',
-	'password' => '192168100250',
-	'database' => 'hospital_q',
+	'hostname' => '192.168.xxx.xxx',
+	'username' => 'xxxxx',
+	'password' => 'xxxxx',
+	'database' => 'xxxxx',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
@@ -116,47 +116,3 @@ $db['db2'] = array(
 	'failover' => array(),
 	'save_queries' => TRUE
 );
-
-// $db['default'] = array(
-// 	'dsn'	=> '',
-// 	'hostname' => '180.180.216.192',
-// 	'username' => 'ud12418',
-// 	'password' => '192168100250',
-// 	'database' => 'db_ud12418',
-// 	'dbdriver' => 'mysqli',
-// 	'dbprefix' => '',
-// 	'pconnect' => FALSE,
-// 	'db_debug' => (ENVIRONMENT !== 'production'),
-// 	'cache_on' => FALSE,
-// 	'cachedir' => '',
-// 	'char_set' => 'utf8',
-// 	'dbcollat' => 'utf8_general_ci',
-// 	'swap_pre' => '',
-// 	'encrypt' => FALSE,
-// 	'compress' => FALSE,
-// 	'stricton' => FALSE,
-// 	'failover' => array(),
-// 	'save_queries' => TRUE
-// );
-
-// $db['db2'] = array(
-// 	'dsn'	=> '',
-// 	'hostname' => 'localhost',
-// 	'username' => 'root',
-// 	'password' => '',
-// 	'database' => 'hospital_q',
-// 	'dbdriver' => 'mysqli',
-// 	'dbprefix' => '',
-// 	'pconnect' => FALSE,
-// 	'db_debug' => (ENVIRONMENT !== 'production'),
-// 	'cache_on' => FALSE,
-// 	'cachedir' => '',
-// 	'char_set' => 'utf8',
-// 	'dbcollat' => 'utf8_general_ci',
-// 	'swap_pre' => '',
-// 	'encrypt' => FALSE,
-// 	'compress' => FALSE,
-// 	'stricton' => FALSE,
-// 	'failover' => array(),
-// 	'save_queries' => TRUE
-// );
